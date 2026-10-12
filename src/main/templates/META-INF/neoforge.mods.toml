@@ -31,13 +31,31 @@ authors="${mod_authors}"
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-Unifies the nuclear systems of Create Nuclear and Alex's Caves: replaces
-Create Nuclear's radiation effect (createnuclear:radiation) with Alex's Caves'
-irradiated effect (alexscaves:irradiated), so both mods share a single radiation
-mechanic, alongside reactor meltdown / siren linkage, tremorzilla egg hatching and
-automation compatibility between the two mods.
+Alex's Caves: Nuclear Convergence is a bridge mod that unifies the uranium and
+nuclear systems of Create Nuclear (atomic nuclear) and Alex's Caves into a single
+radiation mechanic centred on Create Nuclear.
 
-Requires Create and Create Nuclear. Alex's Caves (the Up or Neo port) is optional.
+Features:
+- Radiation unification: Create Nuclear's radiation effect is replaced by Alex's
+  Caves' irradiated effect, so both mods share one radiation mechanic.
+- Uranium item mapping via recipes, ores, mob drops and structure loot.
+- Two fuel rods with different burn yields for Alex's Caves' Nuclear Furnace.
+- Alex's Caves' nuclear bomb converts the blast zone into Create Nuclear's
+  irradiated_land biome.
+- Interchangeable anti-radiation / hazmat armour (radiation and acid resistance).
+- A naturally generated "Abandoned Reactor" structure in the Toxic Caves, plus
+  four new radrock ores (iron / coal / lead / nitrate).
+- Create automation compatibility: item handler capabilities for the Nuclear
+  Furnace (and its 4x4 components), metal barrels, gingerbarrel and the Abyssal
+  Altar, plus the Abyssal Altar as a mechanical arm interaction point.
+- Meltdown linkage: Alex's Caves' nuclear siren and siren light warn when a Create
+  Nuclear reactor runs out of control; a meltdown hatches nearby Tremorzilla eggs
+  (which are then immune to that blast); the Create Nuclear reactor alarm also
+  emits a redstone signal while warning.
+- Irradiated cats and ocelots turn into raycats over time.
+
+Requires Create and Create Nuclear. Alex's Caves is optional: both the Up and Neo
+ports of 1.21.1 are supported (mixins apply automatically to whichever is present).
 '''
 
 # Mixin 配置

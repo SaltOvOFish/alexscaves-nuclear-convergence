@@ -14,7 +14,10 @@
     "AbyssalAltarBlockNeoMixin",
     "NuclearSirenBlockEntityMixin",
     "NuclearSirenBlockEntityNeoMixin",
+    "SirenLightBlockEntityMixin",
+    "SirenLightBlockEntityNeoMixin",
     "ReactorMeltdownExecutorMixin",
+    "ReactorAlarmMixin",
     "NuclearExplosionEntityMixin"
   ],
   "client": [],

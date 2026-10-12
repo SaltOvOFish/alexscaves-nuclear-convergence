@@ -64,7 +64,10 @@ public final class RaycatConversionHandler {
 
         MobEffectInstance effect = living.getEffect(NuclearCompat.AC_IRRADIATED);
         if (effect == null || effect.getAmplifier() < REQUIRED_AMPLIFIER) {
-            living.setData(IRRADIATION_TIME, 0);
+            // 已经是 0 就不必每 tick 重复写入附件数据。
+            if (living.getData(IRRADIATION_TIME) != 0) {
+                living.setData(IRRADIATION_TIME, 0);
+            }
             return;
         }
 

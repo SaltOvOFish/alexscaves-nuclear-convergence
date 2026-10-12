@@ -58,6 +58,9 @@
 在毒化洞穴新增「废弃反应堆」结构（4 种变体，`abandoned_reactor_0~3`），参考 Alex's Caves 的
 遗迹生成逻辑自实现，以**锈蚀金属桶**作为战利品箱（通过 `loot_chest` data 标记定位）。
 
+> 生成细节：结构本体严格居中于单个区块内生成（避免被区块边界切断），基座裙边按地形自适应
+> 坡度铺设（可跨区块延伸）；结构不生成在酸液内（若其竖段含酸液则抬升到酸液顶面以上）。
+
 战利品表（`alexscaves_nuclear_convergence:chests/abandoned_reactor`）包含：
 - 原子核动：铀棒、液氮桶、石墨棒、钢锭、反应堆蓝图、铅锭；
 - Alex's Caves Up：洞穴石板、氡瓶、铀烛、绿色豆粮、废料桶、防化套装、唱片 11。
@@ -86,6 +89,23 @@
 ### 12. 辐射生物转化
 - 原版的猫（Cat）与豹猫（Ocelot）在持续受到辐照 III 及以上效果 45 秒后，转化为
   Alex's Caves 的辐射猫（`raycat`）。
+
+### 13. 反应堆警报器红石输出
+原子核动的**反应堆警报器**在反应堆热量达到 DANGER（失控预警、警报响起）时，除响铃外还会
+**对外输出 15 级红石信号**（六面全向），便于用原版红石或机械动力自动化联动（自动注入冷却、
+拉闸、报警灯、紧急停机等）。
+
+> 说明：警报器的 `POWERED` 状态同时可由红石输入驱动，因此手动为其供电时也会输出。
+
+### 14. 核能警示灯环境侦测
+Alex's Caves 的**核能警示灯**（`alexscaves:siren_light`）原先只响应红石信号；现在会像核能警报器
+一样侦测周围核危险环境，并在有危险时**自动点亮、旋转、发光**：
+- 原子核动反应堆失控（热量 DANGER，半径 32 格）；
+- Alex's Caves 核弹（`alexscaves:nuclear_bomb`，半径 256 格）；
+- 撼地斯拉吐息、核爆怪 Nucleeper（实现 `ActivatesSirens` 接口，半径 256 格）；
+- Alex's Caves 临界核熔炉（POI 查找，半径 128 格）。
+
+无危险时回退为由红石输入控制（原行为不变）。
 
 ## 前置
 
@@ -120,6 +140,8 @@
 - 核能熔炉燃料数量差异通过 mixin 修改 `NuclearFurnaceBlockEntity` 的裂变时间实现；
 - 反应堆熔毁联动通过 mixin 修改 `NuclearSirenBlockEntity`（警报器提前响起）、
   `ReactorMeltdownExecutor`（爆炸孵化蛋）与 `NuclearExplosionEntity`（撼地斯拉免疫）实现；
+- 反应堆警报器红石输出通过 mixin 修改 `ReactorAlarm`（`isSignalSource` / `getSignal` / `getDirectSignal`）实现；
+- 核能警示灯环境侦测通过 mixin 修改 `SirenLightBlockEntity`（每 2 秒侦测一次核危险环境并驱动 `POWERED`）实现；
 - 猫/豹猫变 raycat 通过 `EntityTickEvent` + NeoForge data attachment 累计辐照时间实现；
 - 上述 mixin 各提供两套（Alex's Caves Up 的 `com.alexscaves` 包名 + Alex's Caves Neo 的
   `com.github.alexmodguy.alexscaves` 包名），`required: false`，运行时按实际加载的版本自动生效；
@@ -144,6 +166,8 @@
 | `CN_RADIATION_ID` / `AC_IRRADIATED_ID` | `NuclearCompat.java` | 两个辐射效果的注册名 |
 | `IRRADIATION_RADIUS` | `NuclearBombBiomeHandler.java` | 核弹群系转化半径（默认 90，对应核弹默认规模 3.0 × 30） |
 | 燃料烧制量 | `NuclearCompatUtil.java` | 铀棒 25600 / 钍棒 6400 裂变时间系数 |
+| `HAZARD_ENTITY_RADIUS` / `NUCLEAR_FURNACE_RADIUS` | `NuclearCompatUtil.java` | 核危险环境侦测半径（危险源实体 256 / 临界核熔炉 POI 128） |
+| 反应堆侦测半径 | `NuclearCompatUtil.findMeltdownReactor` | 默认 32 格（每轴 ±32，立方体，按区块方块实体扫描） |
 
 ## 许可证
 

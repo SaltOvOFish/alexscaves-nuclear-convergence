@@ -5,6 +5,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
@@ -28,6 +29,21 @@ public final class NuclearBombBiomeHandler {
     /** Alex's Caves Up 的核爆实体注册名。 */
     private static final ResourceLocation NUCLEAR_EXPLOSION = ResourceLocation.fromNamespaceAndPath("alexscaves", "nuclear_explosion");
 
+    /** 惰性解析并缓存的核爆实体类型（null 表示 Alex's Caves 未加载），避免每次实体加入都做注册表查询。 */
+    private static boolean explosionTypeResolved = false;
+    private static EntityType<?> nuclearExplosionType = null;
+
+    private static EntityType<?> nuclearExplosionType() {
+        if (!explosionTypeResolved) {
+            EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.get(NUCLEAR_EXPLOSION);
+            // get() 对缺失的注册名会返回默认值（猪），因此必须回查注册名确认。
+            nuclearExplosionType = NUCLEAR_EXPLOSION.equals(BuiltInRegistries.ENTITY_TYPE.getKey(type))
+                    ? type : null;
+            explosionTypeResolved = true;
+        }
+        return nuclearExplosionType;
+    }
+
     /**
      * 群系转化半径（方块）。Create Nuclear 的反应堆失控爆炸使用 {@code size * 30}；
      * Alex's Caves 核弹的默认 {@code nukeExplosionSizeModifier} 为 3.0，故取 3.0 * 30 = 90。
@@ -42,8 +58,7 @@ public final class NuclearBombBiomeHandler {
         }
 
         Entity entity = event.getEntity();
-        ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
-        if (id == null || !id.equals(NUCLEAR_EXPLOSION)) {
+        if (entity.getType() != nuclearExplosionType()) {
             return;
         }
 
