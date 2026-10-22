@@ -2,5 +2,45 @@
   "block.alexscaves_nuclear_convergence.radrock_iron_ore": "辐射铁矿石",
   "block.alexscaves_nuclear_convergence.radrock_coal_ore": "辐射煤矿石",
   "block.alexscaves_nuclear_convergence.radrock_lead_ore": "辐射铅矿石",
-  "block.alexscaves_nuclear_convergence.radrock_nitrate_ore": "辐射硝酸盐矿石"
+  "block.alexscaves_nuclear_convergence.radrock_nitrate_ore": "辐射硝酸盐矿石",
+  "block.alexscaves_nuclear_convergence.abyssmarine_thorium_ore": "渊海钍矿石",
+  "block.alexscaves_nuclear_convergence.tuff_thorium_ore": "凝灰岩钍矿石",
+  "block.alexscaves_nuclear_convergence.coprolith_lead_ore": "秽岩铅矿石",
+  "block.alexscaves_nuclear_convergence.guanostone_nitrate_ore": "粪岩硝酸盐矿石",
+
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_assembly.header": "核能熔炉：组装",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_assembly.text_1": "先用 4 个核能熔炉部件铺出 2×2 的第一层",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_assembly.text_2": "再盖上第二层 2×2",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_assembly.text_3": "8 个部件到位后会自动组装成一台核能熔炉",
+
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_io.header": "核能熔炉：输入与输出",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_io.text_1": "核能熔炉的输入与输出由不同面分别进行",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_io.text_2": "铀棒或钍棒从右侧输入，作为熔炉的燃料",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_io.text_3": "原材料从背面输入，在熔炉内完成烧炼",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_io.text_4": "金属桶从左侧输入，用来盛装废料以避免熔炉失控",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_io.text_5": "废料桶与烧炼成品则通过熔炉底部输出",
+
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_critical.header": "核能熔炉：融毁失控",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_critical.text_1": "核能熔炉最多可安全存储 9 份核废料，超出则会引发核爆",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_critical.text_2": "4 份废料：熔炉底部开始泛红",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_critical.text_3": "6 份废料：熔炉失控，周边开始起火",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_critical.text_4": "8 份废料：熔炉即将爆炸，四周陷入火海",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_critical.text_5": "10 份废料：核能，轻而易——坏了坏了！",
+
+  "alexscaves_nuclear_convergence.ponder.magnetic_quarry_bounds.header": "磁力采石场：划定矿区",
+  "alexscaves_nuclear_convergence.ponder.magnetic_quarry_bounds.text_1": "磁力采石场需要用 4 盏磁力灯标出开采范围",
+  "alexscaves_nuclear_convergence.ponder.magnetic_quarry_bounds.text_2": "四盏灯围出的矩形就是矿区，最大 20 格",
+  "alexscaves_nuclear_convergence.ponder.magnetic_quarry_bounds.text_3": "四角齐全后，在矿区中心放入粉碎器",
+
+  "alexscaves_nuclear_convergence.ponder.magnetic_quarry_mining.header": "磁力采石场：自动开采",
+  "alexscaves_nuclear_convergence.ponder.magnetic_quarry_mining.text_1": "粉碎器会在矿区内往返，砸碎下方的方块",
+  "alexscaves_nuclear_convergence.ponder.magnetic_quarry_mining.text_2": "砸出的资源会被磁力吸回采石场",
+  "alexscaves_nuclear_convergence.ponder.magnetic_quarry_mining.text_3": "矿区内再无可挖方块时，采石场停止工作",
+
+  "alexscaves_nuclear_convergence.ponder.submarine_assembly.header": "潜水艇：搭建与下水",
+  "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_1": "先用 3×3 铜块铺出底层",
+  "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_2": "第二、三层使用铜块和奥秘引擎按此搭建，前方留出一排",
+  "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_3": "用深海玻璃补上留空的一排",
+  "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_4": "外壳补齐后，会在原地自动组装出潜水艇",
+  "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_5": "右键乘坐，用 WASD 控制潜水艇前进转向，空格 / Ctrl 控制升降"
 }

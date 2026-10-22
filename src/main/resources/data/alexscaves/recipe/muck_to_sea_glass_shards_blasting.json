@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "experience": 0.15,
+  "cookingtime": 100,
+  "ingredient": {
+    "item": "alexscaves:muck"
+  },
+  "result": {
+    "id": "alexscaves:sea_glass_shards",
+    "count": 1
+  }
+}

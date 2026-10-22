@@ -124,6 +124,8 @@ dependencies {
     compileOnly files("libs/createnuclear-2.0.0-neoforge.jar")
     // Create（仅编译期：注册机械臂交互点类型，让渊海祭坛可作为机械臂目标）
     compileOnly files("libs/create-6.0.10+mc1.21.1.jar")
+    // Ponder（Create 6.x 的思索库，内嵌于 Create 的 jar-in-jar；仅编译期）
+    compileOnly files("libs/ponder-neoforge-1.0.82+mc1.21.1.jar")
 
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

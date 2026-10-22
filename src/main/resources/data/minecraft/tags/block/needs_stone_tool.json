@@ -1,6 +1,6 @@
 {
+  "replace": false,
   "values": [
-    "alexscaves_nuclear_convergence:radrock_iron_ore",
-    "alexscaves_nuclear_convergence:radrock_coal_ore"
+    "alexscaves_nuclear_convergence:guanostone_nitrate_ore"
   ]
 }

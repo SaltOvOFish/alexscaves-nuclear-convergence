@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "alexscaves:abyssal_chasm",
+  "features": "alexscaves_nuclear_convergence:tuff_thorium_ore",
+  "step": "underground_ores"
+}

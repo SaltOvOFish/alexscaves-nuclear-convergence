@@ -39,9 +39,9 @@ public final class NuclearCompatUtil {
             ResourceLocation.fromNamespaceAndPath("createnuclear", "thorium_rod");
 
     /** 铀棒（默认）裂变时间系数，约 256 个物品。 */
-    private static final float URANIUM_FISSION_FACTOR = 25600.0f;
+    private static final float URANIUM_FISSION_FACTOR = 51200.0f;
     /** 钍棒裂变时间系数，约 64 个物品。 */
-    private static final float THORIUM_FISSION_FACTOR = 6400.0f;
+    private static final float THORIUM_FISSION_FACTOR = 12800.0f;
 
     private NuclearCompatUtil() {
     }

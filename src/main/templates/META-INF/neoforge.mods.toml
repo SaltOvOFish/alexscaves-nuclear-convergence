@@ -53,6 +53,13 @@ Features:
   (which are then immune to that blast); the Create Nuclear reactor alarm also
   emits a redstone signal while warning.
 - Irradiated cats and ocelots turn into raycats over time.
+- Create-style Ponder tutorials (6 pages) for the Nuclear Furnace, Magnetic Quarry and Submarine,
+  triggered from their respective items.
+- Four new biome ores: Abyssal Thorium Ore, Tuff Thorium Ore, Coprolith Lead Ore and
+  Guanostone Nitrate Ore, generated in the Abyssal Chasm and Forlorn Hollows.
+- Smelting and blasting recipe: Alex's Caves Muck -> Sea Glass Shards.
+- Thorium and Uranium rods can feed a Create blaze burner to trigger superheating
+  (1600 and 6400 ticks respectively).
 
 Requires Create and Create Nuclear. Alex's Caves is optional: both the Up and Neo
 ports of 1.21.1 are supported (mixins apply automatically to whichever is present).

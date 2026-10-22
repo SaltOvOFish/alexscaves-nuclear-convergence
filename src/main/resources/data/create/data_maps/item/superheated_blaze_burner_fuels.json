@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": {
+    "createnuclear:thorium_rod": {
+      "burn_time": 1600
+    },
+    "createnuclear:uranium_rod": {
+      "burn_time": 6400
+    }
+  }
+}

@@ -2,5 +2,45 @@
   "block.alexscaves_nuclear_convergence.radrock_iron_ore": "Radiated Iron Ore",
   "block.alexscaves_nuclear_convergence.radrock_coal_ore": "Radiated Coal Ore",
   "block.alexscaves_nuclear_convergence.radrock_lead_ore": "Radiated Lead Ore",
-  "block.alexscaves_nuclear_convergence.radrock_nitrate_ore": "Radiated Nitrate Ore"
+  "block.alexscaves_nuclear_convergence.radrock_nitrate_ore": "Radiated Nitrate Ore",
+  "block.alexscaves_nuclear_convergence.abyssmarine_thorium_ore": "Abyssal Thorium Ore",
+  "block.alexscaves_nuclear_convergence.tuff_thorium_ore": "Tuff Thorium Ore",
+  "block.alexscaves_nuclear_convergence.coprolith_lead_ore": "Coprolith Lead Ore",
+  "block.alexscaves_nuclear_convergence.guanostone_nitrate_ore": "Guanostone Nitrate Ore",
+
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_assembly.header": "Nuclear Furnace: Assembly",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_assembly.text_1": "Start with a 2×2 layer of 4 Nuclear Furnace Components",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_assembly.text_2": "Then add the second 2×2 layer",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_assembly.text_3": "Once all 8 parts are in place, the furnace assembles itself",
+
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_io.header": "Nuclear Furnace: Input & Output",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_io.text_1": "A nuclear furnace takes its inputs and outputs on different faces",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_io.text_2": "Uranium or thorium rods go in from the right side as fuel",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_io.text_3": "Raw materials go in from the back and are smelted inside",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_io.text_4": "Metal barrels go in from the left to collect the waste and keep the furnace from going critical",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_io.text_5": "Waste barrels and smelted products come out from the bottom",
+
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_critical.header": "Nuclear Furnace: Meltdown",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_critical.text_1": "A nuclear furnace can safely store 9 units of waste; exceeding that triggers a nuclear explosion",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_critical.text_2": "4 units of waste: the bottom of the furnace starts glowing red",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_critical.text_3": "6 units of waste: the furnace goes out of control, fires break out around it",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_critical.text_4": "8 units of waste: the furnace is on the verge of melting down, everything around it is ablaze",
+  "alexscaves_nuclear_convergence.ponder.nuclear_furnace_critical.text_5": "10 units of waste: nuclear power, light and easy— uh oh, uh oh!",
+
+  "alexscaves_nuclear_convergence.ponder.magnetic_quarry_bounds.header": "Magnetic Quarry: Marking the Area",
+  "alexscaves_nuclear_convergence.ponder.magnetic_quarry_bounds.text_1": "A Magnetic Quarry needs 4 Magnetic Lights to mark its mining area",
+  "alexscaves_nuclear_convergence.ponder.magnetic_quarry_bounds.text_2": "The rectangle between the lights is the mining area, up to 20 blocks",
+  "alexscaves_nuclear_convergence.ponder.magnetic_quarry_bounds.text_3": "With all four corners set, place a smasher in the center of the area",
+
+  "alexscaves_nuclear_convergence.ponder.magnetic_quarry_mining.header": "Magnetic Quarry: Automatic Mining",
+  "alexscaves_nuclear_convergence.ponder.magnetic_quarry_mining.text_1": "The smasher flies around the area and breaks the blocks below",
+  "alexscaves_nuclear_convergence.ponder.magnetic_quarry_mining.text_2": "The resources it breaks are pulled back to the quarry",
+  "alexscaves_nuclear_convergence.ponder.magnetic_quarry_mining.text_3": "When there is nothing left to mine, the quarry stops",
+
+  "alexscaves_nuclear_convergence.ponder.submarine_assembly.header": "Submarine: Building",
+  "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_1": "Start with a 3×3 layer of copper blocks",
+  "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_2": "Build the second and third levels from copper blocks and the Enigmatic Engine like this, leaving the front row open",
+  "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_3": "Fill the open row with Depth Glass",
+  "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_4": "Once the hull is complete, the submarine assembles itself in place",
+  "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_5": "Right-click to ride, WASD to drive and steer, Space / Ctrl to ascend or descend"
 }

@@ -31,8 +31,10 @@
 
 ### 4. 核能熔炉燃料
 核能熔炉（Nuclear Furnace）燃料棒改为：
-- `createnuclear:uranium_rod` → 25600 裂变时间（约 256 个物品）；
-- `createnuclear:thorium_rod` → 6400 裂变时间（约 64 个物品）。
+- `createnuclear:uranium_rod` → 51200 裂变时间（约 512 个物品）；
+- `createnuclear:thorium_rod` → 12800 裂变时间（约 128 个物品）。
+
+同时将核能熔炉的烧炼速度提高到 **2 倍**（`getSpeedReduction()` 返回值 × 0.5）。
 
 ### 5. 核弹群系转化
 `alexscaves:nuclear_bomb` 爆炸时，把爆炸区域转化为 Create Nuclear 的辐照之地群系
@@ -107,6 +109,53 @@ Alex's Caves 的**核能警示灯**（`alexscaves:siren_light`）原先只响应
 
 无危险时回退为由红石输入控制（原行为不变）。
 
+### 15. 思索（Ponder）教程
+
+为 Alex's Caves 的核能熔炉、磁力采石场与潜水艇提供 Create 风格的思索教程，共 **6 页**：
+
+| 触发物品 | 页面 |
+|---|---|
+| `alexscaves:nuclear_furnace_component` | ① 组装 ② 输入与输出 ③ 失控熔毁 |
+| `alexscaves:quarry`、`alexscaves:quarry_smasher` | ① 划定矿区 ② 自动开采 |
+| `alexscaves:enigmatic_engine`、`alexscaves:submarine` | ① 搭建与下水 |
+
+- 场景结构（7×5×7）随模组内置，包含逐块落下、白色矿区边界线、爆炸烟幕、镜头转场等动画；
+- 磁力采石场两页共用同一份结构（底座为基岩），翻页时地面不会跳动；
+- 核能熔炉熔毁页用 `Waste` 方块实体数据演示 4 / 6 / 8 / 10 份废料的递进状态。
+
+### 16. 群系矿石扩展
+
+在 Alex's Caves 群系中新增 4 种矿石，均支持精准采集 / 时运 / 爆炸衰减，挖掘等级为铁镐：
+
+| 矿石 | 基底 | 掉落 | 生成 |
+|---|---|---|---|
+| 渊海钍矿石 `abyssmarine_thorium_ore` | 渊海石 | `createnuclear:raw_thorium` 粗钍 | 渊海陷窟，9 次 × 11 格 |
+| 凝灰岩钍矿石 `tuff_thorium_ore` | 凝灰岩 | `createnuclear:raw_thorium` 粗钍 | 渊海陷窟，5 次 × 9 格 |
+| 秽岩铅矿石 `coprolith_lead_ore` | 秽岩 | `createnuclear:raw_lead` 粗铅 | 异寂空谷，8 次 × 10 格 |
+| 粪岩硝酸盐矿石 `guanostone_nitrate_ore` | 粪岩 | `createnuclear:nitrate` 硝酸盐 | 异寂空谷，6 次 × 10 格 |
+
+同时调整了创造标签栏：
+- 「原子核动」主栏：深层硝酸盐矿石 → 凝灰岩钍矿石 → 渊海钍矿石 → 粪岩硝酸盐矿石 → 秽岩铅矿石 → 辐射铀矿石 → 辐射铅矿石 → 辐射硝酸盐矿石；
+- 「渊海陷窟」栏：凝灰岩钍矿石 → 渊海石 → 渊海石瓦 → 渊海钍矿石；
+- 「异寂空谷」栏：粪岩红石矿石 → 粪岩硝酸盐矿石；秽岩煤矿石 → 秽岩铅矿石；
+- 「毒化洞穴」栏：隐藏 `uranium_shard`（铀晶碎片）与 `uranium`（铀晶），加入 `createnuclear:uranium_powder`（铀粉）与 `createnuclear:raw_uranium`（粗铀），顺序为 铀粉 → 粗铀 → 硫粉。
+
+### 17. 淤泥烧炼配方
+
+新增烧炼配方：`alexscaves:muck`（淤泥）→ `alexscaves:sea_glass_shards`（海洋玻璃碎片）。
+
+- 熔炉：200 tick（10 秒），经验 0.15；
+- 高炉：100 tick（5 秒），经验 0.15。
+
+### 18. 烈焰人燃烧室超级燃料
+
+原子核动的钍棒与铀棒可作为 Create 烈焰人燃烧室的超级燃料（通过 `create:superheated_blaze_burner_fuels` 数据图注入，不影响烈焰蛋糕）：
+
+| 燃料 | 超级燃烧时长 |
+|---|---|
+| `createnuclear:thorium_rod` 钍棒 | 1600 tick（80 秒） |
+| `createnuclear:uranium_rod` 铀棒 | 6400 tick（320 秒） |
+
 ## 前置
 
 - Minecraft 1.21.1 + NeoForge 21.1.x
@@ -126,6 +175,7 @@ Alex's Caves 的**核能警示灯**（`alexscaves:siren_light`）原先只响应
 | Create Nuclear（原子核动） | `createnuclear-2.0.0-neoforge.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/createnuclear) · [Modrinth](https://modrinth.com/project/z611fdf7) · [GitHub 源码](https://github.com/Create-Nuclear-Team/CreateNuclearNeoForge) |
 | Alex's Caves Up | `alexscaves-up-0.1.4.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/alexs-caves-up) |
 | Alex's Caves Neo | `alexscaves-neo-2.0.3.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/alexs-caves-neo) · [Modrinth](https://modrinth.com/mod/alexscavesneo) |
+| Ponder（思索库，Create 内嵌） | `ponder-neoforge-1.0.82+mc1.21.1.jar` | 从 Create 的 jar-in-jar 中提取，或 [Maven](https://maven.createmod.net/) |
 
 > 许可证说明：本项目硬依赖 Create Nuclear 并直接调用其 `BiomeIrradiationService` 等类，
 > 而 Create Nuclear 采用 GPL-3.0，故本项目同样以 GPL-3.0 分发。Alex's Caves（Up / Neo 移植版）
@@ -146,7 +196,11 @@ Alex's Caves 的**核能警示灯**（`alexscaves:siren_light`）原先只响应
 - 上述 mixin 各提供两套（Alex's Caves Up 的 `com.alexscaves` 包名 + Alex's Caves Neo 的
   `com.github.alexmodguy.alexscaves` 包名），`required: false`，运行时按实际加载的版本自动生效；
   两套 mixin 中不依赖 Alex's Caves 具体类的共享逻辑集中在 `NuclearCompatUtil` / `ArmorCompat`；
-- 配方 / 掉落修改通过内置数据包覆盖 `data/alexscaves/...` 实现（声明 AFTER alexscaves 保证覆盖优先级）。
+- 配方 / 掉落修改通过内置数据包覆盖 `data/alexscaves/...` 实现（声明 AFTER alexscaves 保证覆盖优先级）；
+- 思索场景在 `FMLClientSetupEvent` 中一次性注册（`PonderIndex.addPlugin`），语言键为 `<modid>.ponder.<sceneId>.header` / `.text_N`；
+- 思索结构为 7×5×7 的 `.nbt`，放在 `assets/alexscaves_nuclear_convergence/ponder/<组>/`，场景代码通过 `showSection` / `setBlock` 逐块驱动；
+- 新矿石的掉落通过 `loot_table/blocks/*.json` 定义，生成通过 `worldgen/configured_feature` + `placed_feature` + `neoforge:add_features` 组合实现；
+- 烈焰人超级燃料通过 `data/create/data_maps/item/superheated_blaze_burner_fuels.json`（合并语义，不覆盖烈焰蛋糕）注入。
 
 ## 构建
 
@@ -165,9 +219,14 @@ Alex's Caves 的**核能警示灯**（`alexscaves:siren_light`）原先只响应
 |---|---|---|
 | `CN_RADIATION_ID` / `AC_IRRADIATED_ID` | `NuclearCompat.java` | 两个辐射效果的注册名 |
 | `IRRADIATION_RADIUS` | `NuclearBombBiomeHandler.java` | 核弹群系转化半径（默认 90，对应核弹默认规模 3.0 × 30） |
-| 燃料烧制量 | `NuclearCompatUtil.java` | 铀棒 25600 / 钍棒 6400 裂变时间系数 |
+| 燃料烧制量 | `NuclearCompatUtil.java` | 铀棒 51200 / 钍棒 12800 裂变时间系数 |
+| 核能熔炉烧炼速度 | `mixin/NuclearFurnaceBlockEntity*.java` | `getSpeedReduction()` 返回值 × 0.5（2 倍速） |
 | `HAZARD_ENTITY_RADIUS` / `NUCLEAR_FURNACE_RADIUS` | `NuclearCompatUtil.java` | 核危险环境侦测半径（危险源实体 256 / 临界核熔炉 POI 128） |
 | 反应堆侦测半径 | `NuclearCompatUtil.findMeltdownReactor` | 默认 32 格（每轴 ±32，立方体，按区块方块实体扫描） |
+| 矿石生成频率 | `data/alexscaves_nuclear_convergence/worldgen/placed_feature/*.json` | 各矿石的 `count`（每区块尝试次数） |
+| 矿石矿脉大小 | `data/alexscaves_nuclear_convergence/worldgen/configured_feature/*.json` | 各矿石的 `size`（每次矿脉格数） |
+| 思索文本时长 | `client/ponder/*PonderScenes.java` | `showText(n)` 的 n（tick），页面节奏由 `idle(n)` 控制 |
+| 超级燃料时长 | `data/create/data_maps/item/superheated_blaze_burner_fuels.json` | 钍棒 1600 / 铀棒 6400 tick |
 
 ## 许可证
 

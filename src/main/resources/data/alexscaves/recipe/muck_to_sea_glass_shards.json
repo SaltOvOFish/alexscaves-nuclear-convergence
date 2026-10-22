@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "experience": 0.15,
+  "cookingtime": 200,
+  "ingredient": {
+    "item": "alexscaves:muck"
+  },
+  "result": {
+    "id": "alexscaves:sea_glass_shards",
+    "count": 1
+  }
+}

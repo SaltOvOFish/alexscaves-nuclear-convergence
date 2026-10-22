@@ -1,8 +1,9 @@
 {
+  "replace": false,
   "values": [
-    "alexscaves_nuclear_convergence:radrock_iron_ore",
-    "alexscaves_nuclear_convergence:radrock_coal_ore",
-    "alexscaves_nuclear_convergence:radrock_lead_ore",
-    "alexscaves_nuclear_convergence:radrock_nitrate_ore"
+    "alexscaves_nuclear_convergence:abyssmarine_thorium_ore",
+    "alexscaves_nuclear_convergence:tuff_thorium_ore",
+    "alexscaves_nuclear_convergence:coprolith_lead_ore",
+    "alexscaves_nuclear_convergence:guanostone_nitrate_ore"
   ]
 }

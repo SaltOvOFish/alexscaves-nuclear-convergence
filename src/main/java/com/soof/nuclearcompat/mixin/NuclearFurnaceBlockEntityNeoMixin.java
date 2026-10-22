@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
  * Alex's Caves Neo（包名 com.github.alexmodguy.alexscaves）专用。
@@ -35,5 +36,12 @@ public abstract class NuclearFurnaceBlockEntityNeoMixin {
     private static void acnc$adjustFissionTimeByRod(Level level, BlockPos pos, BlockState state, NuclearFurnaceBlockEntity entity, CallbackInfo ci) {
         ((NuclearFurnaceBlockEntityNeoMixin) (Object) entity).fissionTime =
                 NuclearCompatUtil.fissionTimeForRod(entity.getItem(1), NuclearFurnaceBlockEntity.getSpeedReduction());
+    }
+
+    /** 烧炼速度翻倍（返回值 × 0.5）。 */
+    @Inject(method = "getSpeedReduction", at = @At("RETURN"), cancellable = true)
+    private static void acnc$speedUpCooking(CallbackInfoReturnable<Float> cir) {
+        double boosted = cir.getReturnValue() * 0.5;
+        cir.setReturnValue((float) Math.max(0.02, boosted));
     }
 }
