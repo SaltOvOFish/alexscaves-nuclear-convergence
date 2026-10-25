@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "alexscaves_nuclear_convergence:abyssmarine_thorium_ore",
+    "alexscaves_nuclear_convergence:tuff_thorium_ore",
+    "alexscaves:radrock_uranium_ore"
+  ]
+}

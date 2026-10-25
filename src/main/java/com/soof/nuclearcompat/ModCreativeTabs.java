@@ -8,6 +8,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
@@ -32,6 +33,10 @@ public final class ModCreativeTabs {
             ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath("alexscaves", "abyssal_chasm"));
     private static final ResourceKey<CreativeModeTab> AC_FORLORN_HOLLOWS =
             ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath("alexscaves", "forlorn_hollows"));
+    private static final ResourceKey<CreativeModeTab> AC_PRIMORDIAL_CAVES =
+            ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath("alexscaves", "primordial_caves"));
+    private static final ResourceKey<CreativeModeTab> AC_CANDY_CAVITY =
+            ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath("alexscaves", "candy_cavity"));
 
     private ModCreativeTabs() {
     }
@@ -44,6 +49,12 @@ public final class ModCreativeTabs {
             // 隐藏 AC 自己的铀晶碎片与铀晶
             event.remove(itemStack("alexscaves", "uranium_shard"), vis);
             event.remove(itemStack("alexscaves", "uranium"), vis);
+
+            // 隐藏 AC 的铀块，并在原位置（核弹之前）换成原子核动的粗铀块：
+            // 粗铀块 → 核弹 → 未精炼的废料
+            event.remove(itemStack("alexscaves", "block_of_uranium"), vis);
+            event.insertBefore(itemStack("alexscaves", "nuclear_bomb"),
+                    itemStack("createnuclear", "raw_uranium_block"), vis);
 
             // 铀粉 → 粗铀 → 硫粉
             ItemStack sulfur = itemStack("alexscaves", "sulfur_dust");
@@ -62,6 +73,18 @@ public final class ModCreativeTabs {
             event.insertAfter(iron, coal, vis);
             event.insertAfter(coal, lead, vis);
             event.insertAfter(lead, nitrate, vis);
+        }
+
+        if (event.getTabKey().equals(AC_PRIMORDIAL_CAVES)) {
+            // primordial caves: limestone spear -> autunite spear
+            event.insertAfter(itemStack("alexscaves", "limestone_spear"),
+                    new ItemStack(ModBlocks.AUTUNITE_SPEAR.get()), vis);
+        }
+
+        if (event.getTabKey().equals(AC_CANDY_CAVITY)) {
+            // candy cavity: purple soda bottle -> nuka cola
+            event.insertAfter(itemStack("alexscaves", "purple_soda_bottle"),
+                    new ItemStack(ModBlocks.NUKA_COLA.get()), vis);
         }
 
         if (event.getTabKey().equals(CN_MAIN)) {
@@ -86,13 +109,15 @@ public final class ModCreativeTabs {
         }
 
         if (event.getTabKey().equals(AC_ABYSSAL_CHASM)) {
-            // 凝灰岩钍矿石 → 渊海石 → 渊海石瓦 → 渊海钍矿石
+            // 凝灰岩铜矿石 → 凝灰岩钍矿石 → 渊海石 → 渊海石瓦 → 渊海钍矿石
             ItemStack abyssmarine = itemStack("alexscaves", "abyssmarine");
             ItemStack tiles = itemStack("alexscaves", "abyssmarine_tiles");
+            ItemStack tuffCopper = new ItemStack(ModBlocks.TUFF_COPPER_ORE.get());
             ItemStack tuffThorium = new ItemStack(ModBlocks.TUFF_THORIUM_ORE.get());
             ItemStack abyssThorium = new ItemStack(ModBlocks.ABYSSMARINE_THORIUM_ORE.get());
 
-            event.insertBefore(abyssmarine, tuffThorium, vis);
+            event.insertBefore(abyssmarine, tuffCopper, vis);
+            event.insertAfter(tuffCopper, tuffThorium, vis);
             event.insertAfter(tiles, abyssThorium, vis);
         }
 
@@ -102,6 +127,12 @@ public final class ModCreativeTabs {
             ItemStack coprolithCoal = itemStack("alexscaves", "coprolith_coal_ore");
             ItemStack guanoNitrate = new ItemStack(ModBlocks.GUANOSTONE_NITRATE_ORE.get());
             ItemStack coproLead = new ItemStack(ModBlocks.COPROLITH_LEAD_ORE.get());
+
+            // 与井然有矿联动时，银矿石排在对应矿石之前
+            if (ModList.get().isLoaded("oreganized")) {
+                event.insertBefore(guanostoneRedstone, new ItemStack(ModBlocks.GUANOSTONE_SILVER_ORE.get()), vis);
+                event.insertBefore(coprolithCoal, new ItemStack(ModBlocks.COPROLITH_SILVER_ORE.get()), vis);
+            }
 
             event.insertAfter(guanostoneRedstone, guanoNitrate, vis);
             event.insertAfter(coprolithCoal, coproLead, vis);

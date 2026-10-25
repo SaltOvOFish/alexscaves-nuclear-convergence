@@ -9,6 +9,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -16,6 +18,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.RegisterEvent;
+import net.nuclearteam.createnuclear.api.radiation.RadiationRegistry;
 import org.slf4j.Logger;
 
 /**
@@ -55,8 +58,14 @@ public class NuclearCompat {
     public NuclearCompat(IEventBus modEventBus) {
         // 注册本模组新增的方块（四种辐射岩矿石）及对应的方块物品。
         ModBlocks.register(modEventBus);
+        // 注册钙铀云母长矛的投掷物实体类型。
+        ModEntities.register(modEventBus);
+        // 注册废弃反应堆的 Structure 类型与 StructurePiece 类型（供 /locate structure 查询）。
+        ModStructures.register(modEventBus);
         // 注册废弃反应堆 feature 类型。
         FEATURES.register(modEventBus);
+        // 注册「带催化剂的合成」序列化器（核子可乐配方用）。
+        ModRecipes.register(modEventBus);
 
         // FMLCommonSetupEvent 在所有模组的 RegisterEvent 之后触发，
         // 此时两个目标模组的效果都已注册完毕，可以安全查询。
@@ -78,6 +87,45 @@ public class NuclearCompat {
         if (CN_RADIATION != null && AC_IRRADIATED != null) {
             LOGGER.info("[ACUp Nuclear Compat] Radiation unified: {} -> {}", CN_RADIATION_ID, AC_IRRADIATED_ID);
         }
+
+        registerAcRadiationSources();
+    }
+
+    /**
+     * 把 AC 的两个放射性物品接入原子核动的「物品栏辐射」体系。
+     *
+     * <p>原子核动会在每个 tick 遍历玩家背包（主背包 + 副手），累加每个物品的辐射值
+     * （{@code RadiationRegistry.getRadiation(stack)} = 单件值 × 堆叠数），再按服务端配置的
+     * 阈值 {@code radiation_level_1/2/3}（默认 10 / 25 / 50）换算成辐射等级并施加
+     * {@code createnuclear:radiation}——而这个效果随后会被本模组的桥接换为
+     * {@code alexscaves:irradiated}。</p>
+     *
+     * <p>数值参照原子核动自己的物品：黄饼 4.0、粗铀 3.0、铀粉 2.0、铀棒 100.0。
+     * 因此：</p>
+     * <ul>
+     *     <li>辐射铀矿石 = 4.0（与黄饼同级，单个约等于「辐照 I」，不造成伤害）；</li>
+     *     <li>未精炼的废料 = 50.0（单个即「辐照 III」，携带即开始周期性受伤）。</li>
+     * </ul>
+     *
+     * <p>注意：堆叠会按数量累加，一叠 16 个辐射铀矿石相当于 64。</p>
+     */
+    private static void registerAcRadiationSources() {
+        registerAcRadiationSource("radrock_uranium_ore", 4.0D);
+        registerAcRadiationSource("unrefined_waste", 50.0D);
+    }
+
+    /** 按注册名取 AC 物品，存在则登记辐射值；AC 未安装时静默跳过。 */
+    private static void registerAcRadiationSource(String path, double value) {
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath("alexscaves", path);
+        Item item = BuiltInRegistries.ITEM.get(id);
+        // BuiltInRegistries.ITEM 是 DefaultedRegistry：缺失时会返回 AIR 而不是 null，
+        // 所以必须再比对一次注册名，避免把 minecraft:air 当成辐射源。
+        if (item == Items.AIR || !id.equals(BuiltInRegistries.ITEM.getKey(item))) {
+            LOGGER.warn("[ACUp Nuclear Compat] Item '{}' not found, skipped as radiation source.", id);
+            return;
+        }
+        RadiationRegistry.register().item(item).value(value).build();
+        LOGGER.info("[ACUp Nuclear Compat] Registered radiation source: {} = {}", id, value);
     }
 
     /** 注册渊海祭坛为机械臂交互点，让机械臂能像置物台一样拿取/放置其中的物品。 */

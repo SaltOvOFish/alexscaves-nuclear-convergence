@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " A ",
+    "ASA",
+    " S "
+  ],
+  "key": {
+    "A": {
+      "item": "createnuclear:autunite"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "result": {
+    "id": "alexscaves_nuclear_convergence:autunite_spear",
+    "count": 4
+  }
+}

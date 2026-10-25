@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "alexscaves_nuclear_convergence:item/autunite_spear"
+  }
+}

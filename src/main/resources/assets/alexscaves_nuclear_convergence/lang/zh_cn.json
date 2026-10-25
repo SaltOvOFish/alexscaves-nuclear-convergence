@@ -5,7 +5,12 @@
   "block.alexscaves_nuclear_convergence.radrock_nitrate_ore": "辐射硝酸盐矿石",
   "block.alexscaves_nuclear_convergence.abyssmarine_thorium_ore": "渊海钍矿石",
   "block.alexscaves_nuclear_convergence.tuff_thorium_ore": "凝灰岩钍矿石",
+  "block.alexscaves_nuclear_convergence.tuff_copper_ore": "凝灰岩铜矿石",
   "block.alexscaves_nuclear_convergence.coprolith_lead_ore": "秽岩铅矿石",
+  "block.alexscaves_nuclear_convergence.guanostone_silver_ore": "粪岩银矿石",
+  "block.alexscaves_nuclear_convergence.coprolith_silver_ore": "秽岩银矿石",
+  "item.alexscaves_nuclear_convergence.autunite_spear": "钙铀云母长矛",
+  "item.alexscaves_nuclear_convergence.autunite_spear.desc": "命中时施加 20 秒辐照 I",
   "block.alexscaves_nuclear_convergence.guanostone_nitrate_ore": "粪岩硝酸盐矿石",
 
   "alexscaves_nuclear_convergence.ponder.nuclear_furnace_assembly.header": "核能熔炉：组装",
@@ -42,5 +47,6 @@
   "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_2": "第二、三层使用铜块和奥秘引擎按此搭建，前方留出一排",
   "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_3": "用深海玻璃补上留空的一排",
   "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_4": "外壳补齐后，会在原地自动组装出潜水艇",
-  "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_5": "右键乘坐，用 WASD 控制潜水艇前进转向，空格 / Ctrl 控制升降"
+  "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_5": "右键乘坐，用 WASD 控制潜水艇前进转向，空格 / Ctrl 控制升降",
+  "item.alexscaves_nuclear_convergence.nuka_cola": "核子可乐"
 }

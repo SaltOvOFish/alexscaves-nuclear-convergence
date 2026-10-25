@@ -1,0 +1,26 @@
+{
+  "type": "alexscaves_nuclear_convergence:catalyst_shaped",
+  "category": "misc",
+  "pattern": [
+    "RRR",
+    "RSR",
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "tag": "alexscaves_nuclear_convergence:radiation"
+    },
+    "S": {
+      "item": "alexscaves:purple_soda_bottle"
+    }
+  },
+  "result": {
+    "id": "alexscaves_nuclear_convergence:nuka_cola",
+    "count": 1
+  },
+  "catalysts": [
+    {
+      "tag": "alexscaves_nuclear_convergence:radiation"
+    }
+  ]
+}

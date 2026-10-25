@@ -5,7 +5,12 @@
   "block.alexscaves_nuclear_convergence.radrock_nitrate_ore": "Radiated Nitrate Ore",
   "block.alexscaves_nuclear_convergence.abyssmarine_thorium_ore": "Abyssal Thorium Ore",
   "block.alexscaves_nuclear_convergence.tuff_thorium_ore": "Tuff Thorium Ore",
+  "block.alexscaves_nuclear_convergence.tuff_copper_ore": "Tuff Copper Ore",
   "block.alexscaves_nuclear_convergence.coprolith_lead_ore": "Coprolith Lead Ore",
+  "block.alexscaves_nuclear_convergence.guanostone_silver_ore": "Guanostone Silver Ore",
+  "block.alexscaves_nuclear_convergence.coprolith_silver_ore": "Coprolith Silver Ore",
+  "item.alexscaves_nuclear_convergence.autunite_spear": "Autunite Spear",
+  "item.alexscaves_nuclear_convergence.autunite_spear.desc": "Applies 20 seconds of Irradiated I on hit",
   "block.alexscaves_nuclear_convergence.guanostone_nitrate_ore": "Guanostone Nitrate Ore",
 
   "alexscaves_nuclear_convergence.ponder.nuclear_furnace_assembly.header": "Nuclear Furnace: Assembly",
@@ -42,5 +47,6 @@
   "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_2": "Build the second and third levels from copper blocks and the Enigmatic Engine like this, leaving the front row open",
   "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_3": "Fill the open row with Depth Glass",
   "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_4": "Once the hull is complete, the submarine assembles itself in place",
-  "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_5": "Right-click to ride, WASD to drive and steer, Space / Ctrl to ascend or descend"
+  "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_5": "Right-click to ride, WASD to drive and steer, Space / Ctrl to ascend or descend",
+  "item.alexscaves_nuclear_convergence.nuka_cola": "Nuka Cola"
 }

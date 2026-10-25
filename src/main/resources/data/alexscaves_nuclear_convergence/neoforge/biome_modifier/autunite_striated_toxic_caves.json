@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "alexscaves:toxic_caves",
+  "features": "alexscaves_nuclear_convergence:autunite_striated_toxic_caves",
+  "step": "underground_ores"
+}

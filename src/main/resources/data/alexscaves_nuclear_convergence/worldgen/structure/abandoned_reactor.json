@@ -1,0 +1,7 @@
+{
+  "type": "alexscaves_nuclear_convergence:abandoned_reactor",
+  "biomes": "alexscaves:toxic_caves",
+  "step": "underground_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none"
+}

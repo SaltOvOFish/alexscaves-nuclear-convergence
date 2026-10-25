@@ -1,5 +1,9 @@
 package com.soof.nuclearcompat;
 
+import java.util.Collections;
+import java.util.Set;
+import java.util.WeakHashMap;
+
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -16,6 +20,21 @@ import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
  */
 @EventBusSubscriber(modid = NuclearCompat.MODID)
 public final class RadiationCompatHandler {
+
+    /**
+     * 当前处于「辐射 → 辐照」转译状态的实体。
+     *
+     * <p>为什么必须记录：Create Nuclear 的 {@code RadiationCapability#applyEffects}
+     * 每 tick 都会在辐射值 &lt;= 0 时调用 {@code entity.removeEffect(createnuclear:radiation)}，
+     * 哪怕实体身上根本没有该效果；而 NeoForge 的 {@code MobEffectEvent.Remove}
+     * 在 {@code LivingEntity#removeEffect} 里是在 <b>移除之前</b> 无条件触发的，
+     * 并不会先判断效果是否真的存在。若不加区分地跟着删 {@code alexscaves:irradiated}，
+     * 就会把与辐射无关的辐照来源（例如核子可乐）在下一个 tick 直接抹掉。</p>
+     *
+     * <p>用 {@link WeakHashMap} 作为键集，实体卸载后条目自动回收，不会泄漏。</p>
+     */
+    private static final Set<LivingEntity> CONVERTED =
+            Collections.newSetFromMap(new WeakHashMap<>());
 
     private RadiationCompatHandler() {
     }
@@ -56,6 +75,9 @@ public final class RadiationCompatHandler {
         if (isCnRadiation && NuclearCompat.AC_IRRADIATED != null) {
             event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY);
 
+            // 标记为「正在转译」，供 onEffectRemoved 区分真正的离开辐射区与 CN 每 tick 的空调用。
+            CONVERTED.add(entity);
+
             // CN 的 applyEffects 每个 tick 都会重新施加辐射效果，若每次都刷新 duration，
             // 会导致辐照效果的倒计时永不递减、缓慢扣血（applyEffectTick）永不触发。
             // 因此：仅当实体没有辐照效果、或辐射等级发生变化时才重新施加，
@@ -86,7 +108,13 @@ public final class RadiationCompatHandler {
         }
 
         if (event.getEffect().is(NuclearCompat.CN_RADIATION_ID)) {
-            event.getEntity().removeEffect(NuclearCompat.AC_IRRADIATED);
+            // 只有该实体确实处于「辐射 → 辐照」转译状态时，才同步清除辐照。
+            // 否则这只是 CN 在辐射值为 0 时每 tick 发出的空移除调用
+            // （NeoForge 在效果不存在时同样会触发 Remove），必须忽略，
+            // 不然核子可乐之类独立来源的辐照会立刻被删掉。
+            if (CONVERTED.remove(event.getEntity())) {
+                event.getEntity().removeEffect(NuclearCompat.AC_IRRADIATED);
+            }
         }
     }
 }

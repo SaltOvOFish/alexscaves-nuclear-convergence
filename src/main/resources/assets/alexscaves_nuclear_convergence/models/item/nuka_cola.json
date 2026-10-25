@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "alexscaves_nuclear_convergence:item/nuka_cola"
+  }
+}

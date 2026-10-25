@@ -1,6 +1,0 @@
-{
-  "type": "neoforge:add_features",
-  "biomes": "alexscaves:toxic_caves",
-  "features": "alexscaves_nuclear_convergence:abandoned_reactor",
-  "step": "lakes"
-}

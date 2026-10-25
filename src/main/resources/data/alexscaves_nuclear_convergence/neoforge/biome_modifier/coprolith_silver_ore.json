@@ -1,0 +1,9 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "alexscaves:forlorn_hollows",
+  "features": "alexscaves_nuclear_convergence:coprolith_silver_ore",
+  "step": "underground_ores",
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "oreganized" }
+  ]
+}

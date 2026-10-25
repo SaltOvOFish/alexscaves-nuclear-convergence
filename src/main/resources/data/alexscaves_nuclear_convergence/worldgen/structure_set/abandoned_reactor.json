@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "alexscaves_nuclear_convergence:abandoned_reactor",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 842196731,
+    "spacing": 6,
+    "separation": 3
+  }
+}

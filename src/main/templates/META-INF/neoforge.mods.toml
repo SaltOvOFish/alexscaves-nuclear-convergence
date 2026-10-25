@@ -60,6 +60,13 @@ Features:
 - Smelting and blasting recipe: Alex's Caves Muck -> Sea Glass Shards.
 - Thorium and Uranium rods can feed a Create blaze burner to trigger superheating
   (1600 and 6400 ticks respectively).
+- Autunite Spear: a throwable spear (3.0 melee, 4.0 thrown) that applies 20 seconds
+  of Irradiated I on hit and can be picked back up; uses the Limestone Spear sounds.
+- Nuka Cola: a drink that grants 10 seconds of Sugar Rush and 10 seconds of Irradiated I.
+- A "radiation" item tag plus a catalyst crafting recipe type; the Nuka Cola and
+  Limestone Spear -> Autunite Spear recipes keep the surrounding materials.
+- Autunite ore in the Toxic Caves' radrock, and Alex's Caves' uranium ore / unrefined
+  waste now work as inventory radiation sources.
 
 Requires Create and Create Nuclear. Alex's Caves is optional: both the Up and Neo
 ports of 1.21.1 are supported (mixins apply automatically to whichever is present).

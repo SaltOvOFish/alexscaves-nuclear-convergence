@@ -1,0 +1,26 @@
+{
+  "type": "alexscaves_nuclear_convergence:catalyst_shaped",
+  "category": "equipment",
+  "pattern": [
+    "RRR",
+    "RSR",
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "tag": "alexscaves_nuclear_convergence:radiation"
+    },
+    "S": {
+      "item": "alexscaves:limestone_spear"
+    }
+  },
+  "result": {
+    "id": "alexscaves_nuclear_convergence:autunite_spear",
+    "count": 1
+  },
+  "catalysts": [
+    {
+      "tag": "alexscaves_nuclear_convergence:radiation"
+    }
+  ]
+}

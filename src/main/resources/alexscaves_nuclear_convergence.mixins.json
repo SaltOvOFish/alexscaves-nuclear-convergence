@@ -20,6 +20,9 @@
     "ReactorAlarmMixin",
     "NuclearExplosionEntityMixin"
   ],
-  "client": [],
+  "client": [
+    "ACItemstackRendererMixin",
+    "ACItemstackRendererNeoMixin"
+  ],
   "server": []
 }
