@@ -367,6 +367,9 @@ alexscaves_nuclear_convergence:tuff_thorium_ore / alexscaves_nuclear_convergence
 - README 补充长矛、核子可乐、「辐射」标签、催化剂配方、物品栏辐射与钙铀云母矿说明，并新增本更新日志；
 - `neoforge.mods.toml` 描述同步更新。
 
+**其他**
+- 此前已在工作区完成但未纳入版本库的内容一并提交归档：与井然有矿（Oreganized）的可选联动、凝灰岩铜矿石、粪岩/秽岩银矿石、内置资源包 `Nuclear Convergence: Oreganized Style`、废弃反应堆结构化的代码实现。
+
 ## 许可证
 
 本项目以 [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.html)（GPL-3.0）分发，详见 `LICENSE`。
