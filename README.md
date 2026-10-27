@@ -367,7 +367,7 @@ alexscaves_nuclear_convergence:tuff_thorium_ore / alexscaves_nuclear_convergence
 - 隐藏进度「切尔诺贝利」（`alexscaves_nuclear_convergence:chernobyl`），挂在 AC「警告：检测到大量辐射」之后，玩家进入废弃反应堆结构范围时解锁；
 - 隐藏进度「原始人的核武器」（`alexscaves_nuclear_convergence:primitive_nuke`），挂在 AC「基岩小镇」之后，获得钙铀云母长矛时解锁；
 - 隐藏进度「哇，宾周在发光！」（`alexscaves_nuclear_convergence:nuka_cola_glow`），挂在 AC「碳酸浴」之后，饮用核子可乐解锁；
-- 核子可乐贴图改为荧光绿液体（保留原瓶身与瓶盖配色）；
+- 核子可乐贴图改为荧光蓝液体（保留原瓶身与瓶盖配色）；
 
 **调整**
 - 渊海陷窟矿石生成提升：凝灰岩钍矿 5→**32** 次、凝灰岩铜矿 6→**40** 次、渊海钍矿 11→**16** 次；高度范围由 `0~256` 收紧到 `-64~96`（原先大多数尝试落在海水/空气里，几乎撞不上凝灰岩团簇）；
