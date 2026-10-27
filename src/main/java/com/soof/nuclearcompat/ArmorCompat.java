@@ -6,6 +6,10 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 两套护甲的公共判断工具：
@@ -27,9 +31,25 @@ public final class ArmorCompat {
     private ArmorCompat() {
     }
 
+    /**
+     * 注册名 → 物品的解析缓存。
+     *
+     * <p>原先每次判断都走 {@code BuiltInRegistries.ITEM.get(ResourceLocation)}（一次哈希 + 查表），
+     * 而酸液路径（{@code AcidBlock#entityInside}）是<b>每个实体每 tick</b> 调用，
+     * 一次要查 4 次；辐照效果结算时也要查 8 次。缓存后全部变成一次 Map 查表。</p>
+     */
+    private static final Map<ResourceLocation, Item> ITEM_CACHE = new ConcurrentHashMap<>();
+
+    private static Item item(ResourceLocation id) {
+        return ITEM_CACHE.computeIfAbsent(id, key -> {
+            Item resolved = BuiltInRegistries.ITEM.get(key);
+            return resolved == null ? Items.AIR : resolved;
+        });
+    }
+
     private static boolean is(ItemStack stack, ResourceLocation id) {
-        Item item = BuiltInRegistries.ITEM.get(id);
-        return item != null && stack.is(item);
+        Item item = item(id);
+        return item != Items.AIR && stack.is(item);
     }
 
     /** 该物品是否为原子核动的防辐射护甲（任一部件）。 */

@@ -40,10 +40,19 @@ public abstract class NuclearSirenBlockEntityMixin {
     @Inject(method = "tick", at = @At("TAIL"))
     private static void acnc$detectCriticalReactor(
             Level level, BlockPos pos, BlockState state, NuclearSirenBlockEntity be, CallbackInfo ci) {
-        if (level.isClientSide || be.age % 20 != 0) {
+        if (level.isClientSide) {
             return;
         }
         NuclearSirenBlockEntityMixin self = (NuclearSirenBlockEntityMixin) (Object) be;
+        // 性能优化：64 格内没有玩家、且当前未在报警时直接跳过扫描；
+        // 同时用坐标打散相位，避免多台警报器在同一 tick 集中扫描。
+        if (!self.acnc$reactorDanger
+                && !level.hasNearbyAlivePlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 64.0D)) {
+            return;
+        }
+        if (Math.floorMod(be.age + pos.asLong(), 20L) != 0L) {
+            return;
+        }
         boolean danger = NuclearCompatUtil.findMeltdownReactor(level, pos) != null;
         if (self.acnc$reactorDanger != danger) {
             self.acnc$reactorDanger = danger;

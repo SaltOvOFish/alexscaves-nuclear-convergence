@@ -113,6 +113,8 @@ Alex's Caves 的**核能警示灯**（`alexscaves:siren_light`）原先只响应
 
 无危险时回退为由红石输入控制（原行为不变）。
 
+> 性能：64 格内没有玩家时直接跳过侦测；多台设备按坐标错开相位、并按区块缓存结果 10 tick，避免同一 tick 集体扫描。
+
 ### 15. 思索（Ponder）教程
 
 为 Alex's Caves 的核能熔炉、磁力采石场与潜水艇提供 Create 风格的思索教程，共 **6 页**：
@@ -129,23 +131,25 @@ Alex's Caves 的**核能警示灯**（`alexscaves:siren_light`）原先只响应
 
 ### 16. 群系矿石扩展
 
-在 Alex's Caves 群系中新增 5 种矿石，均支持精准采集 / 时运 / 爆炸衰减。挖掘等级：渊海钍矿石与凝灰岩钍矿石为 **钻石镐**（与原子核动的钍矿石对齐，Alex's Caves 的辐射铀矿石也一并提升为钻石镐）；凝灰岩铜矿石、粪岩硝酸盐矿石为 **石镐**；秽岩铅矿石为 **铁镐**：
+在 Alex's Caves 群系中新增 5 种矿石，均支持精准采集 / 时运 / 爆炸衰减。
+挖掘等级：两种钍矿石为**钻石镐**（顺带把 AC 的辐射铀矿石也提升为钻石镐），秽岩铅矿石为**铁镐**，凝灰岩铜矿石与粪岩硝酸盐矿石为**石镐**：
 
 | 矿石 | 基底 | 掉落 | 生成 |
 |---|---|---|---|
-| 渊海钍矿石 `abyssmarine_thorium_ore` | 渊海石 | `createnuclear:raw_thorium` 粗钍 | 渊海陷窟，11 次 × 13 格 |
-| 凝灰岩钍矿石 `tuff_thorium_ore` | 凝灰岩 | `createnuclear:raw_thorium` 粗钍 | 渊海陷窟，5 次 × 9 格 |
-| 凝灰岩铜矿石 `tuff_copper_ore` | 凝灰岩 | `minecraft:raw_copper` 粗铜 | 渊海陷窟，6 次 × 9 格 |
-| 秽岩铅矿石 `coprolith_lead_ore` | 秽岩 | `createnuclear:raw_lead` 粗铅 | 异寂空谷，8 次 × 10 格 |
+| 渊海钍矿石 `abyssmarine_thorium_ore` | 渊海石 | `createnuclear:raw_thorium` 粗钍 | 渊海陷窟，16 次 × 13 格 |
+| 凝灰岩钍矿石 `tuff_thorium_ore` | 凝灰岩 | `createnuclear:raw_thorium` 粗钍 | 渊海陷窟，32 次 × 9 格 |
+| 凝灰岩铜矿石 `tuff_copper_ore` | 凝灰岩 | `minecraft:raw_copper` 粗铜 | 渊海陷窟，40 次 × 9 格 |
+| 秽岩铅矿石 `coprolith_lead_ore` | 秽岩 | `createnuclear:raw_lead` 粗铅（装井然有矿时改掉 `oreganized:raw_lead`） | 异寂空谷，8 次 × 10 格 |
 | 粪岩硝酸盐矿石 `guanostone_nitrate_ore` | 粪岩 | `createnuclear:nitrate` 硝酸盐 | 异寂空谷，6 次 × 10 格 |
 
-同时调整了创造标签栏：
+### 创造标签栏调整
+
 - 「原子核动」主栏：深层硝酸盐矿石 → 凝灰岩钍矿石 → 渊海钍矿石 → 粪岩硝酸盐矿石 → 秽岩铅矿石 → 辐射铀矿石 → 辐射铅矿石 → 辐射硝酸盐矿石；
 - 「渊海陷窟」栏：凝灰岩铜矿石 → 凝灰岩钍矿石 → 渊海石 → 渊海石瓦 → 渊海钍矿石；
 - 「异寂空谷」栏：粪岩红石矿石 → 粪岩硝酸盐矿石；秽岩煤矿石 → 秽岩铅矿石；
-- 「毒化洞穴」栏：隐藏 `uranium_shard`（铀晶碎片）、`uranium`（铀晶）与 `block_of_uranium`（铀块），加入 `createnuclear:uranium_powder`（铀粉）与 `createnuclear:raw_uranium`（粗铀），顺序为 铀粉 → 粗铀 → 硫粉；铀块的原位置换成 `createnuclear:raw_uranium_block`（粗铀块），即 粗铀块 → 核弹 → 未精炼的废料；
-- 「原始洞穴」栏：`alexscaves_nuclear_convergence:autunite_spear`（钙铀云母长矛）排在石灰岩长矛之后；
-- 「糖果龋洞」栏：`alexscaves_nuclear_convergence:nuka_cola`（核子可乐）排在紫色苏打水瓶之后。
+- 「毒化洞穴」栏：隐藏 `uranium_shard` / `uranium` / `block_of_uranium`，加入铀粉与粗铀（铀粉 → 粗铀 → 硫粉）；铀块原位换成原子核动的粗铀块（粗铀块 → 核弹 → 未精炼的废料）；
+- 「原始洞穴」栏：钙铀云母长矛排在石灰岩长矛之后；
+- 「糖果龋洞」栏：核子可乐排在紫色苏打水瓶之后。
 
 ### 17. 淤泥烧炼配方
 
@@ -169,9 +173,9 @@ Alex's Caves 的**核能警示灯**（`alexscaves:siren_light`）原先只响应
 
 - **生成**：移除原子核动的铅矿与深板岩铅矿（`createnuclear:lead_ore`），主世界只保留 Oreganized 的铅矿与深板岩铅矿；
 - **配方**：原子核动的 18 个铅相关配方（熔炼/高炉/工作台/粉碎/洗涤）全部改用 Oreganized 的粗铅、铅锭、铅块、铅粒；未安装 Oreganized 时保持原配方；
-- **秽岩铅矿石**：仍在本模组中生成，但掉落改为 `oreganized:raw_lead`，并加入 `oreganized:creates_lead_cloud` 标签，挖掘时与井然有矿的铅矿一样散出铅尘；
+- **铅矿石**：秽岩铅矿石与辐射铅矿石仍在本模组中生成，但掉落改为 `oreganized:raw_lead`，并加入 `oreganized:creates_lead_cloud` 标签，挖掘时与井然有矿的铅矿一样散出铅尘；
 - **银矿石**：异寂空谷新增粪岩银矿石与秽岩银矿石（6 次 × 10 格），掉落 `oreganized:raw_silver`，仅在安装 Oreganized 时生成，并在创造栏排在粪岩红石矿石 / 秽岩煤矿石之前；
-- **材质**：内置资源包 `Nuclear Convergence: Oreganized Style`（灰紫色铅矿点），默认启用，可在资源包界面关闭。
+- **材质**：内置资源包 `Nuclear Convergence: Oreganized Style` 把**秽岩铅矿石**与**辐射铅矿石**的矿点统一为井然有矿的灰紫色铅矿点（基底贴图不变），默认启用，可在资源包界面关闭。
 
 ### 20. 钙铀云母长矛
 
@@ -252,11 +256,23 @@ alexscaves_nuclear_convergence:tuff_thorium_ore / alexscaves_nuclear_convergence
 
 ### 24. 钙铀云母矿
 
-在毒化洞穴的辐射岩中生成钙铀云母矿（`createnuclear:autunite`），使用 Create 的
-`create:layered_ore`（层状矿脉）：两层图案（权重 2 / 2~4 格、权重 1 / 1~2 格），
-目标方块 `alexscaves:radrock`，`discard_chance_on_air_exposure: 0.0`。
+毒化洞穴辐射岩中的 `createnuclear:autunite`，用 Create 的 `create:layered_ore` 层状生成：
+两层图案（权重 2 / 2~4 格、权重 1 / 1~2 格），目标 `alexscaves:radrock`，`size 12`、每区块 3 次尝试，
+高度 `above_bottom 0 ~ absolute 256`，暴露空气不消失。
 
-生成参数：`size 12`、每区块 **3** 次尝试、`in_square` + 高度范围 `above_bottom 0 ~ absolute 256`。
+### 25. 进度（Advancements）
+
+新增 4 条隐藏进度，均挂在 Alex's Caves 原有进度树内：
+
+| 进度 | 挂载点 | 解锁条件 |
+|---|---|---|
+| 哇，宾周在发光！ `nuka_cola_glow` | 碳酸浴 | 饮用核子可乐 |
+| 原始人的核武器 `primitive_nuke` | 基岩小镇 | 获得钙铀云母长矛 |
+| 切尔诺贝利 `chernobyl` | 警告：检测到大量辐射 | 进入废弃反应堆结构范围 |
+| 爱，深潜，与机器人 `love_deep_and_robots` | 友好协定 | 机械臂向渊海祭坛放入珍珠（授予 16 格内最近玩家）|
+
+同时覆盖 AC 的两条进度，让它们检测原子核动物品：淘铀热 → `createnuclear:raw_uranium`，
+热棒 → `createnuclear:uranium_rod`（图标同步替换）。
 
 ## 前置
 
@@ -275,7 +291,7 @@ alexscaves_nuclear_convergence:tuff_thorium_ore / alexscaves_nuclear_convergence
 |---|---|---|
 | Create（机械动力） | `create-6.0.10+mc1.21.1.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/create) · [Modrinth](https://modrinth.com/mod/create) · [GitHub 源码](https://github.com/Creators-of-Create/Create) |
 | Create Nuclear（原子核动） | `createnuclear-2.0.0-neoforge.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/createnuclear) · [Modrinth](https://modrinth.com/project/z611fdf7) · [GitHub 源码](https://github.com/Create-Nuclear-Team/CreateNuclearNeoForge) |
-| Alex's Caves Up | `alexscaves-up-0.1.4.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/alexs-caves-up) |
+| Alex's Caves Up | `alexscaves-up-0.1.5.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/alexs-caves-up) |
 | Alex's Caves Neo | `alexscaves-neo-2.0.3.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/alexs-caves-neo) · [Modrinth](https://modrinth.com/mod/alexscavesneo) |
 | Ponder（思索库，Create 内嵌） | `ponder-neoforge-1.0.82+mc1.21.1.jar` | 从 Create 的 jar-in-jar 中提取，或 [Maven](https://maven.createmod.net/) |
 
@@ -293,7 +309,7 @@ alexscaves_nuclear_convergence:tuff_thorium_ore / alexscaves_nuclear_convergence
 - 反应堆熔毁联动通过 mixin 修改 `NuclearSirenBlockEntity`（警报器提前响起）、
   `ReactorMeltdownExecutor`（爆炸孵化蛋）与 `NuclearExplosionEntity`（撼地斯拉免疫）实现；
 - 反应堆警报器红石输出通过 mixin 修改 `ReactorAlarm`（`isSignalSource` / `getSignal` / `getDirectSignal`）实现；
-- 核能警示灯环境侦测通过 mixin 修改 `SirenLightBlockEntity`（每 2 秒侦测一次核危险环境并驱动 `POWERED`）实现；
+- 核能警示灯环境侦测通过 mixin 修改 `SirenLightBlockEntity`（40 tick 周期、按坐标错开相位，仅附近有玩家时侦测，结果按区块缓存 10 tick）实现；
 - 猫/豹猫变 raycat 通过 `EntityTickEvent` + NeoForge data attachment 累计辐照时间实现；
 - 上述 mixin 各提供两套（Alex's Caves Up 的 `com.alexscaves` 包名 + Alex's Caves Neo 的
   `com.github.alexmodguy.alexscaves` 包名），`required: false`，运行时按实际加载的版本自动生效；
@@ -330,6 +346,7 @@ alexscaves_nuclear_convergence:tuff_thorium_ore / alexscaves_nuclear_convergence
 | 燃料烧制量 | `NuclearCompatUtil.java` | 铀棒 51200 / 钍棒 12800 裂变时间系数 |
 | 核能熔炉烧炼速度 | `mixin/NuclearFurnaceBlockEntity*.java` | `getSpeedReduction()` 返回值 × 0.5（2 倍速） |
 | `HAZARD_ENTITY_RADIUS` / `NUCLEAR_FURNACE_RADIUS` | `NuclearCompatUtil.java` | 核危险环境侦测半径（危险源实体 256 / 临界核熔炉 POI 128） |
+| `HAZARD_CACHE_TTL` | `NuclearCompatUtil.java` | 核危险侦测结果按区块缓存时长（默认 10 tick）；扫描周期 / 相位见 `Siren*Mixin` |
 | 反应堆侦测半径 | `NuclearCompatUtil.findMeltdownReactor` | 默认 32 格（每轴 ±32，立方体，按区块方块实体扫描） |
 | 矿石生成频率 | `data/alexscaves_nuclear_convergence/worldgen/placed_feature/*.json` | 各矿石的 `count`（每区块尝试次数） |
 | 矿石矿脉大小 | `data/alexscaves_nuclear_convergence/worldgen/configured_feature/*.json` | 各矿石的 `size`（每次矿脉格数） |
@@ -342,6 +359,27 @@ alexscaves_nuclear_convergence:tuff_thorium_ore / alexscaves_nuclear_convergence
 | 「辐射」标签成员 | `data/alexscaves_nuclear_convergence/tags/item/radiation.json` | 改这里即可增删可用材料 |
 
 ## 更新日志
+
+### v1.3.2
+
+**新增**
+- 隐藏进度「爱，深潜，与机器人」（`alexscaves_nuclear_convergence:love_deep_and_robots`），挂在 AC「友好协定」之后，用机械臂向渊海祭坛放入珍珠时授予最近玩家；
+- 隐藏进度「切尔诺贝利」（`alexscaves_nuclear_convergence:chernobyl`），挂在 AC「警告：检测到大量辐射」之后，玩家进入废弃反应堆结构范围时解锁；
+- 隐藏进度「原始人的核武器」（`alexscaves_nuclear_convergence:primitive_nuke`），挂在 AC「基岩小镇」之后，获得钙铀云母长矛时解锁；
+- 隐藏进度「哇，宾周在发光！」（`alexscaves_nuclear_convergence:nuka_cola_glow`），挂在 AC「碳酸浴」之后，饮用核子可乐解锁；
+- 核子可乐贴图改为荧光绿液体（保留原瓶身与瓶盖配色）；
+
+**调整**
+- 渊海陷窟矿石生成提升：凝灰岩钍矿 5→**32** 次、凝灰岩铜矿 6→**40** 次、渊海钍矿 11→**16** 次；高度范围由 `0~256` 收紧到 `-64~96`（原先大多数尝试落在海水/空气里，几乎撞不上凝灰岩团簇）；
+- AC 的「淘铀热」与「热棒」两条进度改接原子核动物品：前者检测/图标改为 `createnuclear:raw_uranium`（粗铀），后者改为 `createnuclear:uranium_rod`（铀棒）；通过同名路径覆盖 AC 的进度 JSON 实现（本模组对 `alexscaves` 声明了 `ordering="AFTER"`，数据包优先级更高）；
+- 内置资源包 `Nuclear Convergence: Oreganized Style` 扩展覆盖范围：除秽岩铅矿石（`coprolith_lead_ore`）外，辐射铅矿石（`radrock_lead_ore`）也改用井然有矿风格的灰紫色铅矿点贴图；
+- 资源包描述同步改为复数（lead ore textures）。
+
+**修复**
+- 辐射铅矿石未接入井然有矿联动（依旧掉 `createnuclear:raw_lead`、挖掘不出铅尘）：现已与秽岩铅矿石一致——掉落改为 `oreganized:raw_lead`，并加入 `oreganized:creates_lead_cloud` 标签。
+
+**优化**
+- 警示灯 / 警报器的核危险侦测：附近 64 格内无玩家时完全跳过扫描、扫描相位按坐标打散（原先会在同一 tick 集体扫描）、结果按区块缓存 10 tick（同一基地的多台设备只算一次）；反应堆控制器的反射方法改为按类缓存，不再每次 `Class#getMethod`；辐射效果移除加 `isEmpty()` 短路。大量警示灯场景下该子系统开销预计降为原来的 1/10 ~ 1/50。
 
 ### v1.3.1
 
@@ -362,13 +400,6 @@ alexscaves_nuclear_convergence:tuff_thorium_ore / alexscaves_nuclear_convergence
 **修复**
 - 核子可乐只生效甜蜜冲刺、没有辐照：原子核动每 tick 在辐射值为 0 时都会调用一次 `removeEffect(createnuclear:radiation)`，而 NeoForge 的 `MobEffectEvent.Remove` 在目标效果不存在时依旧触发，导致桥接逻辑把独立来源的辐照一并删除；改为只在「确实处于辐射→辐照转译状态」时同步清除（同一修复也让长矛命中的 20 秒辐照真正生效）；
 - 长矛投掷物改为本模组实体，避免 AC `LimestoneSpearEntity` 固定使用石灰岩矛、拾取物不同步的问题。
-
-**文档**
-- README 补充长矛、核子可乐、「辐射」标签、催化剂配方、物品栏辐射与钙铀云母矿说明，并新增本更新日志；
-- `neoforge.mods.toml` 描述同步更新。
-
-**其他**
-- 此前已在工作区完成但未纳入版本库的内容一并提交归档：与井然有矿（Oreganized）的可选联动、凝灰岩铜矿石、粪岩/秽岩银矿石、内置资源包 `Nuclear Convergence: Oreganized Style`、废弃反应堆结构化的代码实现。
 
 ## 许可证
 

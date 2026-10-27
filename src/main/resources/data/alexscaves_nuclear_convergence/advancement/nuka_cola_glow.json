@@ -1,0 +1,30 @@
+{
+  "parent": "alexscaves:alexscaves/enter_purple_soda",
+  "display": {
+    "icon": {
+      "id": "alexscaves_nuclear_convergence:nuka_cola"
+    },
+    "title": {
+      "translate": "advancements.alexscaves_nuclear_convergence.nuka_cola_glow.title"
+    },
+    "description": {
+      "translate": "advancements.alexscaves_nuclear_convergence.nuka_cola_glow.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": true
+  },
+  "criteria": {
+    "drink_nuka_cola": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "alexscaves_nuclear_convergence:nuka_cola"
+          ]
+        }
+      }
+    }
+  }
+}

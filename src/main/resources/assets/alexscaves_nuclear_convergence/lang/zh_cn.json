@@ -48,5 +48,13 @@
   "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_3": "用深海玻璃补上留空的一排",
   "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_4": "外壳补齐后，会在原地自动组装出潜水艇",
   "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_5": "右键乘坐，用 WASD 控制潜水艇前进转向，空格 / Ctrl 控制升降",
-  "item.alexscaves_nuclear_convergence.nuka_cola": "核子可乐"
+  "item.alexscaves_nuclear_convergence.nuka_cola": "核子可乐",
+  "advancements.alexscaves_nuclear_convergence.nuka_cola_glow.title": "哇，宾周在发光！",
+  "advancements.alexscaves_nuclear_convergence.nuka_cola_glow.desc": "饮用核子可乐",
+  "advancements.alexscaves_nuclear_convergence.primitive_nuke.title": "原始人的核武器",
+  "advancements.alexscaves_nuclear_convergence.primitive_nuke.desc": "获得一把钙铀云母长矛",
+  "advancements.alexscaves_nuclear_convergence.chernobyl.title": "切尔诺贝利",
+  "advancements.alexscaves_nuclear_convergence.chernobyl.desc": "发现一座废弃反应堆",
+  "advancements.alexscaves_nuclear_convergence.love_deep_and_robots.title": "爱，深潜，与机器人",
+  "advancements.alexscaves_nuclear_convergence.love_deep_and_robots.desc": "尝试使用动力臂与深潜者交易"
 }

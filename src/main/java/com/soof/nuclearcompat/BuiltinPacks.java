@@ -11,9 +11,10 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 
 /**
- * 内置资源包：把秽岩铅矿石的贴图切换为「井然有矿」风格。
+ * 内置资源包：把铅矿石的贴图切换为「井然有矿」风格。
  *
- * <p>资源包内容放在 {@code resourcepacks/oreganized_style/}，默认位于资源包列表顶部并启用；
+ * <p>目前覆盖：{@code coprolith_lead_ore}（秽岩铅矿石）与 {@code radrock_lead_ore}（辐射铅矿石）。
+ * 资源包内容放在 {@code resourcepacks/oreganized_style/}，默认位于资源包列表顶部并启用；
  * 不想用的话可以在游戏内的资源包界面取消勾选。</p>
  */
 @EventBusSubscriber(modid = NuclearCompat.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)

@@ -1,0 +1,23 @@
+{
+  "parent": "alexscaves:alexscaves/trade_with_deep_one",
+  "display": {
+    "icon": {
+      "id": "create:mechanical_arm"
+    },
+    "title": {
+      "translate": "advancements.alexscaves_nuclear_convergence.love_deep_and_robots.title"
+    },
+    "description": {
+      "translate": "advancements.alexscaves_nuclear_convergence.love_deep_and_robots.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": true
+  },
+  "criteria": {
+    "arm_offering": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

@@ -112,7 +112,10 @@ public final class RadiationCompatHandler {
             // 否则这只是 CN 在辐射值为 0 时每 tick 发出的空移除调用
             // （NeoForge 在效果不存在时同样会触发 Remove），必须忽略，
             // 不然核子可乐之类独立来源的辐照会立刻被删掉。
-            if (CONVERTED.remove(event.getEntity())) {
+            //
+            // 性能：CN 每 tick 会对每个生物调用一次 removeEffect，这里先用 isEmpty()
+            // 短路（O(1)、无哈希），否则每次都要在 WeakHashMap 里查一遍。
+            if (!CONVERTED.isEmpty() && CONVERTED.remove(event.getEntity())) {
                 event.getEntity().removeEffect(NuclearCompat.AC_IRRADIATED);
             }
         }

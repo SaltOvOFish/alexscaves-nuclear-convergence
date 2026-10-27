@@ -48,5 +48,13 @@
   "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_3": "Fill the open row with Depth Glass",
   "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_4": "Once the hull is complete, the submarine assembles itself in place",
   "alexscaves_nuclear_convergence.ponder.submarine_assembly.text_5": "Right-click to ride, WASD to drive and steer, Space / Ctrl to ascend or descend",
-  "item.alexscaves_nuclear_convergence.nuka_cola": "Nuka Cola"
+  "item.alexscaves_nuclear_convergence.nuka_cola": "Nuka Cola",
+  "advancements.alexscaves_nuclear_convergence.nuka_cola_glow.title": "Whoa, It's Glowing!",
+  "advancements.alexscaves_nuclear_convergence.nuka_cola_glow.desc": "Drink a Nuka Cola",
+  "advancements.alexscaves_nuclear_convergence.primitive_nuke.title": "Primitive Man's Nuke",
+  "advancements.alexscaves_nuclear_convergence.primitive_nuke.desc": "Obtain an Autunite Spear",
+  "advancements.alexscaves_nuclear_convergence.chernobyl.title": "Chernobyl",
+  "advancements.alexscaves_nuclear_convergence.chernobyl.desc": "Discover an Abandoned Reactor",
+  "advancements.alexscaves_nuclear_convergence.love_deep_and_robots.title": "Love, Deep & Robots",
+  "advancements.alexscaves_nuclear_convergence.love_deep_and_robots.desc": "Try trading with a Deep One using a Mechanical Arm"
 }

@@ -1,0 +1,32 @@
+{
+  "parent": "alexscaves:alexscaves/limestone",
+  "display": {
+    "icon": {
+      "id": "alexscaves_nuclear_convergence:autunite_spear"
+    },
+    "title": {
+      "translate": "advancements.alexscaves_nuclear_convergence.primitive_nuke.title"
+    },
+    "description": {
+      "translate": "advancements.alexscaves_nuclear_convergence.primitive_nuke.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": true
+  },
+  "criteria": {
+    "obtain_autunite_spear": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "alexscaves_nuclear_convergence:autunite_spear"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

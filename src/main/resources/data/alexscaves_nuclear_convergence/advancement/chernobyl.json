@@ -1,0 +1,36 @@
+{
+  "parent": "alexscaves:alexscaves/discover_toxic_caves",
+  "display": {
+    "icon": {
+      "id": "createnuclear:reactor_blueprint_item"
+    },
+    "title": {
+      "translate": "advancements.alexscaves_nuclear_convergence.chernobyl.title"
+    },
+    "description": {
+      "translate": "advancements.alexscaves_nuclear_convergence.chernobyl.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": true
+  },
+  "criteria": {
+    "find_abandoned_reactor": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structures": "alexscaves_nuclear_convergence:abandoned_reactor"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

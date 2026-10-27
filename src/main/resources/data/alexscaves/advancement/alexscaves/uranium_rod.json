@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "id": "createnuclear:uranium_rod"
+    },
+    "title": {
+      "translate": "advancements.alexscaves.uranium_rod.title"
+    },
+    "description": {
+      "translate": "advancements.alexscaves.uranium_rod.desc"
+    }
+  },
+  "parent": "alexscaves:alexscaves/defeat_nucleeper",
+  "criteria": {
+    "limestone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "createnuclear:uranium_rod"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

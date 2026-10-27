@@ -55,8 +55,9 @@ Features:
 - Irradiated cats and ocelots turn into raycats over time.
 - Create-style Ponder tutorials (6 pages) for the Nuclear Furnace, Magnetic Quarry and Submarine,
   triggered from their respective items.
-- Four new biome ores: Abyssal Thorium Ore, Tuff Thorium Ore, Coprolith Lead Ore and
-  Guanostone Nitrate Ore, generated in the Abyssal Chasm and Forlorn Hollows.
+- New biome ores: Abyssal Thorium Ore, Tuff Thorium Ore, Tuff Copper Ore, Coprolith
+  Lead Ore and Guanostone Nitrate Ore (Abyssal Chasm / Forlorn Hollows), plus two
+  silver ores when Oreganized is installed.
 - Smelting and blasting recipe: Alex's Caves Muck -> Sea Glass Shards.
 - Thorium and Uranium rods can feed a Create blaze burner to trigger superheating
   (1600 and 6400 ticks respectively).
@@ -67,6 +68,8 @@ Features:
   Limestone Spear -> Autunite Spear recipes keep the surrounding materials.
 - Autunite ore in the Toxic Caves' radrock, and Alex's Caves' uranium ore / unrefined
   waste now work as inventory radiation sources.
+- Four hidden advancements attached to the Alex's Caves tree (Nuka Cola, Autunite
+  Spear, Abandoned Reactor, mechanical-arm pearl offering).
 
 Requires Create and Create Nuclear. Alex's Caves is optional: both the Up and Neo
 ports of 1.21.1 are supported (mixins apply automatically to whichever is present).

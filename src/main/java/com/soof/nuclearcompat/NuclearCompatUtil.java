@@ -87,9 +87,13 @@ public final class NuclearCompatUtil {
                             || !be.getBlockState().is(controller)) {
                         continue;
                     }
+                    Method[] methods = reactorMethods(be.getClass());
+                    if (methods == null) {
+                        continue;
+                    }
                     try {
-                        int heat = (Integer) be.getClass().getMethod("getConfiguredPatternHeat").invoke(be);
-                        int size = (Integer) be.getClass().getMethod("getMultiblockSize").invoke(be);
+                        int heat = (Integer) methods[0].invoke(be);
+                        int size = (Integer) methods[1].invoke(be);
                         if (!IHeat.HeatLevel.isNotDanger(heat, size)) {
                             return p.immutable();
                         }
@@ -128,6 +132,36 @@ public final class NuclearCompatUtil {
 
     /** 危险源实体侦测半径，与 Alex's Caves 核能警报器一致（核弹 / 撼地斯拉在 256 格内触发警报）。 */
     private static final int HAZARD_ENTITY_RADIUS = 256;
+
+    /**
+     * 核危险侦测结果缓存：同一区块内的多台警示灯/警报器只扫一次（{@value #HAZARD_CACHE_TTL} tick 内有效）。
+     * 危险状态变化以秒计，0.5 秒的滞后不可感知，但能把“一个基地 100 盏灯”的扫描次数降到接近 1。
+     */
+    private static final long HAZARD_CACHE_TTL = 10L;
+    private static final int HAZARD_CACHE_LIMIT = 512;
+    private static final Map<HazardKey, HazardCacheEntry> HAZARD_CACHE = new ConcurrentHashMap<>();
+
+    private record HazardKey(ResourceKey<Level> dimension, int chunkX, int chunkZ) {
+    }
+
+    private record HazardCacheEntry(long tick, boolean hazard) {
+    }
+
+    /** 反应堆控制器的两个反射方法按类缓存，避免每次扫描都调 {@code Class#getMethod}。 */
+    private static final Map<Class<?>, Method[]> REACTOR_METHODS = new ConcurrentHashMap<>();
+
+    private static Method[] reactorMethods(Class<?> type) {
+        return REACTOR_METHODS.computeIfAbsent(type, cls -> {
+            try {
+                return new Method[] {
+                        cls.getMethod("getConfiguredPatternHeat"),
+                        cls.getMethod("getMultiblockSize")
+                };
+            } catch (Exception e) {
+                return null;
+            }
+        });
+    }
     /** 临界核熔炉 POI 侦测半径，与 Alex's Caves 核能警报器一致。 */
     private static final int NUCLEAR_FURNACE_RADIUS = 128;
 
@@ -145,6 +179,23 @@ public final class NuclearCompatUtil {
         if (level.isClientSide) {
             return false;
         }
+        // 性能优化：按区块缓存结果，同一区块内的大量警示灯共享一次扫描。
+        long now = level.getGameTime();
+        HazardKey key = new HazardKey(level.dimension(), center.getX() >> 4, center.getZ() >> 4);
+        HazardCacheEntry cached = HAZARD_CACHE.get(key);
+        if (cached != null && now - cached.tick() <= HAZARD_CACHE_TTL) {
+            return cached.hazard();
+        }
+        boolean hazard = computeNuclearHazard(level, center);
+        if (HAZARD_CACHE.size() >= HAZARD_CACHE_LIMIT) {
+            HAZARD_CACHE.clear();
+        }
+        HAZARD_CACHE.put(key, new HazardCacheEntry(now, hazard));
+        return hazard;
+    }
+
+    /** 真正的核危险侦测（结果会被 {@link #HAZARD_CACHE} 按区块缓存）。 */
+    private static boolean computeNuclearHazard(Level level, BlockPos center) {
         // 原子核动反应堆失控
         if (findMeltdownReactor(level, center) != null) {
             return true;
