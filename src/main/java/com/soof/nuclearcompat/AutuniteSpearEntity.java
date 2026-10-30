@@ -37,7 +37,8 @@ public class AutuniteSpearEntity extends AbstractArrow {
     }
 
     public AutuniteSpearEntity(Level level, LivingEntity owner, ItemStack stack) {
-        super(ModEntities.AUTUNITE_SPEAR.get(), owner, level, stack.copy(), null);
+        // 拾取物固定为 1 根：投掷总是只消耗 1 根，若把整叠传进来，拾取时会整叠收回去（刷物品）。
+        super(ModEntities.AUTUNITE_SPEAR.get(), owner, level, stack.copyWithCount(1), null);
     }
 
     @Override

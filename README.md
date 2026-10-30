@@ -175,7 +175,8 @@ Alex's Caves 的**核能警示灯**（`alexscaves:siren_light`）原先只响应
 - **配方**：原子核动的 18 个铅相关配方（熔炼/高炉/工作台/粉碎/洗涤）全部改用 Oreganized 的粗铅、铅锭、铅块、铅粒；未安装 Oreganized 时保持原配方；
 - **铅矿石**：秽岩铅矿石与辐射铅矿石仍在本模组中生成，但掉落改为 `oreganized:raw_lead`，并加入 `oreganized:creates_lead_cloud` 标签，挖掘时与井然有矿的铅矿一样散出铅尘；
 - **银矿石**：异寂空谷新增粪岩银矿石与秽岩银矿石（6 次 × 10 格），掉落 `oreganized:raw_silver`，仅在安装 Oreganized 时生成，并在创造栏排在粪岩红石矿石 / 秽岩煤矿石之前；
-- **材质**：内置资源包 `Nuclear Convergence: Oreganized Style` 把**秽岩铅矿石**与**辐射铅矿石**的矿点统一为井然有矿的灰紫色铅矿点（基底贴图不变），默认启用，可在资源包界面关闭。
+- **材质**：内置资源包 `Nuclear Convergence: Oreganized Style` 把**秽岩铅矿石**与**辐射铅矿石**的矿点统一为井然有矿的灰紫色铅矿点（基底贴图不变），默认启用，可在资源包界面关闭；
+- **铅中毒免疫**：AC 防化服四件套与原子核动防辐射四件套登记进 `oreganized:lead_protection/armor_set`，四件齐全即免疫铅尘云的毒素效果（毒/眩晕）。
 
 ### 20. 钙铀云母长矛
 
@@ -359,6 +360,14 @@ alexscaves_nuclear_convergence:tuff_thorium_ore / alexscaves_nuclear_convergence
 | 「辐射」标签成员 | `data/alexscaves_nuclear_convergence/tags/item/radiation.json` | 改这里即可增删可用材料 |
 
 ## 更新日志
+
+### v1.3.3
+
+**新增**
+- 穿满 AC 防化服或原子核动防辐射套装时免疫井然有矿的铅尘云中毒（通过 `oreganized:lead_protection/armor_set` 标签）。
+
+**修复**
+- 投掷钙铀云母长矛后拾取会整叠回收，导致可以刷物品（现在拾取物固定为 1 根）。
 
 ### v1.3.2
 
