@@ -1,8 +1,25 @@
-{
-  "feature": "alexscaves_nuclear_convergence:radrock_nitrate_ore",
-  "placement": [
-    { "type": "minecraft:count", "count": 4 },
-    { "type": "minecraft:in_square" },
-    { "type": "minecraft:height_range", "height": { "type": "minecraft:uniform", "min_inclusive": { "above_bottom": 0 }, "max_inclusive": { "absolute": 256 } } }
-  ]
+﻿{
+    "feature":  "alexscaves_nuclear_convergence:radrock_nitrate_ore",
+    "placement":  [
+                      {
+                          "type":  "alexscaves_nuclear_convergence:config_count",
+                          "key":  "radrock_nitrate_ore",
+                          "count":  4
+                      },
+                      {
+                          "type":  "minecraft:in_square"
+                      },
+                      {
+                          "type":  "minecraft:height_range",
+                          "height":  {
+                                         "type":  "minecraft:uniform",
+                                         "min_inclusive":  {
+                                                               "above_bottom":  0
+                                                           },
+                                         "max_inclusive":  {
+                                                               "absolute":  256
+                                                           }
+                                     }
+                      }
+                  ]
 }

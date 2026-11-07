@@ -121,7 +121,7 @@ dependencies {
     // Alex's Caves Neo（仅编译期：mixin 目标类，包名 com.github.alexmodguy.alexscaves）
     compileOnly files("libs/alexscaves-neo-2.0.3.jar")
     // Create Nuclear（仅编译期：直接调用 BiomeIrradiationService 做群系转化）
-    compileOnly files("libs/createnuclear-2.0.0-neoforge.jar")
+    compileOnly files("libs/createnuclear-2.0.1-neoforge.jar")
     // Create（仅编译期：注册机械臂交互点类型，让渊海祭坛可作为机械臂目标）
     compileOnly files("libs/create-6.0.10+mc1.21.1.jar")
     // Ponder（Create 6.x 的思索库，内嵌于 Create 的 jar-in-jar；仅编译期）

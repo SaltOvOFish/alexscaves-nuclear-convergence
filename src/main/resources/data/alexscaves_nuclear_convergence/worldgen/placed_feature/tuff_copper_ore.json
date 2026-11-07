@@ -1,24 +1,25 @@
-{
-  "feature": "alexscaves_nuclear_convergence:tuff_copper_ore",
-  "placement": [
-    {
-      "type": "minecraft:count",
-      "count": 40
-    },
-    {
-      "type": "minecraft:in_square"
-    },
-    {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "minecraft:uniform",
-        "min_inclusive": {
-          "above_bottom": 0
-        },
-        "max_inclusive": {
-          "absolute": 96
-        }
-      }
-    }
-  ]
+﻿{
+    "feature":  "alexscaves_nuclear_convergence:tuff_copper_ore",
+    "placement":  [
+                      {
+                          "type":  "alexscaves_nuclear_convergence:config_count",
+                          "key":  "tuff_copper_ore",
+                          "count":  40
+                      },
+                      {
+                          "type":  "minecraft:in_square"
+                      },
+                      {
+                          "type":  "minecraft:height_range",
+                          "height":  {
+                                         "type":  "minecraft:uniform",
+                                         "min_inclusive":  {
+                                                               "above_bottom":  0
+                                                           },
+                                         "max_inclusive":  {
+                                                               "absolute":  96
+                                                           }
+                                     }
+                      }
+                  ]
 }

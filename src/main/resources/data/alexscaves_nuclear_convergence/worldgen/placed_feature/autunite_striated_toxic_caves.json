@@ -1,20 +1,25 @@
-{
-  "feature": "alexscaves_nuclear_convergence:autunite_striated_toxic_caves",
-  "placement": [
-    {
-      "type": "minecraft:count",
-      "count": 3
-    },
-    {
-      "type": "minecraft:in_square"
-    },
-    {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "minecraft:uniform",
-        "min_inclusive": { "above_bottom": 0 },
-        "max_inclusive": { "absolute": 256 }
-      }
-    }
-  ]
+﻿{
+    "feature":  "alexscaves_nuclear_convergence:autunite_striated_toxic_caves",
+    "placement":  [
+                      {
+                          "type":  "alexscaves_nuclear_convergence:config_count",
+                          "key":  "autunite_striated_toxic_caves",
+                          "count":  3
+                      },
+                      {
+                          "type":  "minecraft:in_square"
+                      },
+                      {
+                          "type":  "minecraft:height_range",
+                          "height":  {
+                                         "type":  "minecraft:uniform",
+                                         "min_inclusive":  {
+                                                               "above_bottom":  0
+                                                           },
+                                         "max_inclusive":  {
+                                                               "absolute":  256
+                                                           }
+                                     }
+                      }
+                  ]
 }

@@ -13,7 +13,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -55,7 +57,14 @@ public class NuclearCompat {
     public static final DeferredHolder<Feature<?>, AbandonedReactorFeature> ABANDONED_REACTOR_FEATURE =
             FEATURES.register("abandoned_reactor", () -> new AbandonedReactorFeature(AbandonedReactorFeature.Config.CODEC));
 
-    public NuclearCompat(IEventBus modEventBus) {
+    public NuclearCompat(IEventBus modEventBus, ModContainer modContainer) {
+        // 配置文件：config/alexscaves_nuclear_convergence-common.toml
+        modContainer.registerConfig(ModConfig.Type.COMMON, NuclearCompatConfig.SPEC);
+        // 数据包条件（让配方/群系修改器跟随配置开关）。
+        ModConditions.register(modEventBus);
+        // 自定义矿石密度修饰符。
+        ModWorldgen.register(modEventBus);
+
         // 注册本模组新增的方块（四种辐射岩矿石）及对应的方块物品。
         ModBlocks.register(modEventBus);
         // 注册钙铀云母长矛的投掷物实体类型。

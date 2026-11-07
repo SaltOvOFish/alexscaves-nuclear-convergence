@@ -11,17 +11,26 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 
 /**
- * 内置资源包：把铅矿石的贴图切换为「井然有矿」风格。
+ * 本模组内置的资源包（都在资源包界面可选，默认不启用）。
  *
- * <p>目前覆盖：{@code coprolith_lead_ore}（秽岩铅矿石）与 {@code radrock_lead_ore}（辐射铅矿石）。
- * 资源包内容放在 {@code resourcepacks/oreganized_style/}，默认位于资源包列表顶部并启用；
- * 不想用的话可以在游戏内的资源包界面取消勾选。</p>
+ * <ul>
+ *     <li>{@code oreganized_style} — 把铅矿石的矿点换成「井然有矿」风格；
+ *         另外还覆盖了原子核动的一些贴图（染色防辐射服、反应堆强化玻璃）。</li>
+ *     <li>{@code clear_vision} — 隐藏防辐射头盔与 AC 防化头盔的第一人称视野遮罩。</li>
+ * </ul>
+ *
+ * <p>名称用 {@link Component#translatable} 传入，描述写在各自 {@code pack.mcmeta} 里、
+ * 同样是可翻译组件（{@code {"translate": "..."}}），两者都靠模组的语言文件翻译
+ * （{@code assets/alexscaves_nuclear_convergence/lang/*.json}）。</p>
  */
 @EventBusSubscriber(modid = NuclearCompat.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public final class BuiltinPacks {
 
     private static final ResourceLocation OREGANIZED_STYLE =
             ResourceLocation.fromNamespaceAndPath(NuclearCompat.MODID, "resourcepacks/oreganized_style");
+
+    private static final ResourceLocation CLEAR_VISION =
+            ResourceLocation.fromNamespaceAndPath(NuclearCompat.MODID, "resourcepacks/clear_vision");
 
     private BuiltinPacks() {
     }
@@ -31,10 +40,19 @@ public final class BuiltinPacks {
         if (event.getPackType() != PackType.CLIENT_RESOURCES) {
             return;
         }
+        if (NuclearCompatConfig.COMMON.leadStylePack.get()) {
+            event.addPackFinders(
+                    OREGANIZED_STYLE,
+                    PackType.CLIENT_RESOURCES,
+                    Component.translatable("resourcepack.alexscaves_nuclear_convergence.oreganized_style.name"),
+                    PackSource.BUILT_IN,
+                    false,
+                    Pack.Position.TOP);
+        }
         event.addPackFinders(
-                OREGANIZED_STYLE,
+                CLEAR_VISION,
                 PackType.CLIENT_RESOURCES,
-                Component.literal("Nuclear Convergence: Oreganized Style"),
+                Component.translatable("resourcepack.alexscaves_nuclear_convergence.clear_vision.name"),
                 PackSource.BUILT_IN,
                 false,
                 Pack.Position.TOP);

@@ -39,6 +39,15 @@ public class AbandonedReactorStructure extends Structure {
 
     @Override
     protected Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
+        // 生成概率（0 = 不生成）：配置在 0~1 之间时按概率跳过候选区块。
+        double chance = NuclearCompatConfig.COMMON.reactorChance.get();
+        if (chance <= 0.0D) {
+            return Optional.empty();
+        }
+        if (chance < 1.0D && context.random().nextDouble() >= chance) {
+            return Optional.empty();
+        }
+
         ChunkPos chunk = context.chunkPos();
         int x = chunk.getMinBlockX() + 8;
         int z = chunk.getMinBlockZ() + 8;

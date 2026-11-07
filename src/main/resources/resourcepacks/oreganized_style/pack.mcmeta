@@ -1,6 +1,8 @@
 {
   "pack": {
     "pack_format": 34,
-    "description": "Nuclear Convergence — Oreganized-style lead ore textures"
+    "description": {
+      "translate": "resourcepack.alexscaves_nuclear_convergence.oreganized_style.description"
+    }
   }
 }

@@ -56,5 +56,10 @@
   "advancements.alexscaves_nuclear_convergence.chernobyl.title": "切尔诺贝利",
   "advancements.alexscaves_nuclear_convergence.chernobyl.desc": "发现一座废弃反应堆",
   "advancements.alexscaves_nuclear_convergence.love_deep_and_robots.title": "爱，深潜，与机器人",
-  "advancements.alexscaves_nuclear_convergence.love_deep_and_robots.desc": "尝试使用动力臂与深潜者交易"
+  "advancements.alexscaves_nuclear_convergence.love_deep_and_robots.desc": "尝试使用动力臂与深潜者交易",
+
+  "resourcepack.alexscaves_nuclear_convergence.oreganized_style.name": "核力汇聚：井然有矿风格",
+  "resourcepack.alexscaves_nuclear_convergence.oreganized_style.description": "铅矿石纹理、染色防辐射服与反应堆强化玻璃改用井然有矿的暗紫铅配色",
+  "resourcepack.alexscaves_nuclear_convergence.clear_vision.name": "核力汇聚：清晰头盔视野",
+  "resourcepack.alexscaves_nuclear_convergence.clear_vision.description": "隐藏原子核动防辐射头盔与 AC 防化面罩的视野遮罩"
 }

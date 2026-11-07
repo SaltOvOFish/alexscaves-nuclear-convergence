@@ -160,7 +160,7 @@ public final class OreganizedCompat {
 
     @SubscribeEvent
     public static void onLootTableLoad(LootTableLoadEvent event) {
-        if (!ModList.get().isLoaded(OREGANIZED)) {
+        if (!ModList.get().isLoaded(OREGANIZED) || !NuclearCompatConfig.COMMON.fullLeadIntegration.get()) {
             return;
         }
         String override = TABLE_OVERRIDES.get(event.getName());

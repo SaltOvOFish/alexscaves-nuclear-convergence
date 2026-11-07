@@ -275,6 +275,19 @@ alexscaves_nuclear_convergence:tuff_thorium_ore / alexscaves_nuclear_convergence
 同时覆盖 AC 的两条进度，让它们检测原子核动物品：淘铀热 → `createnuclear:raw_uranium`，
 热棒 → `createnuclear:uranium_rod`（图标同步替换）。
 
+### 26. 头盔视野遮罩
+
+- 原子核动防辐射头盔自带第一人称全屏遮罩（按剩余耐久分 5 档换贴图）；本模组把这套贴图**内置**，
+  并给 AC 防化头盔（`alexscaves:hazmat_mask`）补上完全一致的效果（同样 5 档、同样贴图）；
+- 两套遮罩都**没有配置开关**，默认按原样渲染；内置资源包
+  **`Nuclear Convergence: Clear Helmet Vision`**（默认不启用）会把两套遮罩贴图替换为透明，
+  勾选它即可关掉视野遮挡（想恢复就取消勾选）；
+- 内置资源包 `Nuclear Convergence: Oreganized Style` 除了铅矿贴图，也包含防辐射服模型贴图
+  （默认 + 16 种颜色）与反应堆强化玻璃贴图；它在资源包界面里的图标就是辐射铅矿石纹理（`pack.png`）；
+- 两个内置资源包（`Oreganized Style` / `Clear Helmet Vision`）的**名称与说明都走语言文件**
+  （`resourcepack.alexscaves_nuclear_convergence.<包名>.name` / `.description`），
+  中文环境显示为「核力汇聚：井然有矿风格」「核力汇聚：清晰头盔视野」，英文环境保持原英文名。
+
 ## 前置
 
 - Minecraft 1.21.1 + NeoForge 21.1.x
@@ -359,7 +372,55 @@ alexscaves_nuclear_convergence:tuff_thorium_ore / alexscaves_nuclear_convergence
 | 催化剂配方内容 | `data/alexscaves_nuclear_convergence/recipe/*.json` | 核子可乐、钙铀云母长矛（两条） |
 | 「辐射」标签成员 | `data/alexscaves_nuclear_convergence/tags/item/radiation.json` | 改这里即可增删可用材料 |
 
+## 配置
+
+配置文件：`config/alexscaves_nuclear_convergence-common.toml`（COMMON，首次启动后生成）。
+
+### 一、世界生成 `[worldgen]`
+
+| 项 | 默认 | 说明 |
+|---|---|---|
+| `reactor_chance` | 1.0 | 废弃反应堆生成概率：**0 = 不生成**，1 = 正常；0~1 之间按概率跳过候选区块 |
+| `[worldgen.ores]` 下的 12 项 | 全部 1.0 | 每种矿石的密度倍率：**0 = 不生成**，1 = 原本密度，可填小数（0.5 = 一半） |
+
+矿石项：`radrock_iron_ore`、`radrock_coal_ore`、`radrock_lead_ore`、`radrock_nitrate_ore`、
+`abyssmarine_thorium_ore`、`tuff_thorium_ore`、`tuff_copper_ore`、`coprolith_lead_ore`、
+`guanostone_nitrate_ore`、`coprolith_silver_ore`、`guanostone_silver_ore`、`autunite_striated_toxic_caves`（钙铀云母矿）。
+
+### 二、井然有矿 `[oreganized]`
+
+| 项 | 默认 | 说明 |
+|---|---|---|
+| `full_lead_integration` | true | 完全使用 Oreganized 的铅体系：开启时禁用原子核动自身的铅矿生成、18 个铅相关配方改用 Oreganized 材料，本模组铅矿也掉落 `oreganized:raw_lead` |
+| `lead_style_pack` | true | 是否注册内置资源包 `Nuclear Convergence: Oreganized Style`（铅矿点、防辐射服、反应堆强化玻璃的暗紫配色；仍需在资源包界面勾选） |
+
+### 三、其它 `[general]`
+
+| 项 | 默认 | 说明 |
+|---|---|---|
+| `enhanced_anti_radiation_armor` | true | 增强防辐射套装：头盔 2 / 胸甲 6 / 护腿 5 / 靴子 2，每件 +0.1 击退抗性 |
+
+> 世界生成与数据包条件在**数据包加载时**求值：改完配置后 `/reload` 即可让矿石 / 反应堆 / 铅整合开关生效（已生成的区块不受影响）；护甲增强在退出重进世界（或重启）后完全生效。
+>
+> 头盔视野遮罩不占用配置项，统一由内置资源包 `Nuclear Convergence: Clear Helmet Vision` 控制：勾选 = 不遮挡，取消勾选 = 遮挡（默认）。
+
 ## 更新日志
+
+### v1.4.0
+
+**新增**
+- 新增配置文件 `config/alexscaves_nuclear_convergence-common.toml`：世界生成（废弃反应堆概率 + 12 种矿石密度倍率）、井然有矿联动开关、护甲增强开关；
+- AC 防化头盔现在拥有与原子核动防辐射头盔一致的第一人称视野遮罩（5 档耐久贴图，贴图已内置到模组）；
+- 新增内置资源包 **`Nuclear Convergence: Clear Helmet Vision`**（默认不启用）：启用后同时关闭两套头盔的视野遮挡（视野遮罩本身不提供配置项）。
+
+**调整**
+- 原子核动防辐射套装护甲值改为 **头盔 2 / 胸甲 6 / 护腿 5 / 靴子 2**，并每件额外 **+0.1 击退抗性**；
+- 修饰符 ID 改为按部件区分（原先四件共用同一 ID，会在实体属性表里互相覆盖，导致整套护甲值计算/显示异常）；
+- 编译基准升级到原子核动 **2.0.1**（2.0.1 相对 2.0.0 只新增了 `splashing/nitrate_from_limesand` 配方，无 API / 资源路径变化，本模组无需改动）。
+
+**修复**
+- 防辐射套装现在可以用任意 `#c:ingots/lead` 铅锭修复，包含井然有矿的铅锭（新 mixin：`ArmorItemRepairMixin`）；
+- 防辐射套装补齐 `minecraft:head_armor` / `chest_armor` / `leg_armor` / `foot_armor` 与对应的 `minecraft:enchantable/*` 标签，附魔灌注台与附魔台现在可正常给予护甲类附魔。
 
 ### v1.3.3
 

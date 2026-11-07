@@ -1,19 +1,23 @@
-{
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    {
-      "tag": "c:ingots/lead"
-    }
-  ],
-  "result": {
-    "count": 9,
-    "id": "oreganized:lead_nugget"
-  },
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "oreganized"
-    }
-  ]
+﻿{
+    "type":  "minecraft:crafting_shapeless",
+    "category":  "misc",
+    "ingredients":  [
+                        {
+                            "tag":  "c:ingots/lead"
+                        }
+                    ],
+    "result":  {
+                   "count":  9,
+                   "id":  "oreganized:lead_nugget"
+               },
+    "neoforge:conditions":  [
+                                {
+                                    "type":  "neoforge:mod_loaded",
+                                    "modid":  "oreganized"
+                                },
+                                {
+                                    "type":  "alexscaves_nuclear_convergence:config",
+                                    "key":  "oreganized.full_lead_integration"
+                                }
+                            ]
 }

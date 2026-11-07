@@ -18,7 +18,8 @@
     "SirenLightBlockEntityNeoMixin",
     "ReactorMeltdownExecutorMixin",
     "ReactorAlarmMixin",
-    "NuclearExplosionEntityMixin"
+    "NuclearExplosionEntityMixin",
+    "ArmorItemRepairMixin"
   ],
   "client": [
     "ACItemstackRendererMixin",
