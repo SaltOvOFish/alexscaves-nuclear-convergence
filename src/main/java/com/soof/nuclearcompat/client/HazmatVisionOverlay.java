@@ -9,7 +9,6 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -33,8 +32,16 @@ import com.soof.nuclearcompat.NuclearCompat;
 @EventBusSubscriber(modid = NuclearCompat.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public final class HazmatVisionOverlay {
 
-    private static final Item HAZMAT_MASK = BuiltInRegistries.ITEM.get(
-            ResourceLocation.fromNamespaceAndPath("alexscaves", "hazmat_mask"));
+    /**
+     * 只存 ID、不缓存 {@code Item}。
+     *
+     * <p>{@code @EventBusSubscriber} 的类会在模组构造阶段就被加载，那时 Alex's Caves 的物品
+     * 还没进入注册表，{@code BuiltInRegistries.ITEM.get(...)} 会返回 {@code minecraft:air}；
+     * 而空头槽的 {@link ItemStack#getItem()} 恰好也是 AIR，结果就是「不戴头盔时显示遮罩、
+     * 戴防化面罩时反而不显示」。所以这里每次都按注册名实时比对。</p>
+     */
+    private static final ResourceLocation HAZMAT_MASK_ID =
+            ResourceLocation.fromNamespaceAndPath("alexscaves", "hazmat_mask");
 
     private static final String TEXTURE_ROOT = "textures/misc/helmet_vision/";
 
@@ -78,7 +85,7 @@ public final class HazmatVisionOverlay {
         }
 
         ItemStack helmet = player.getItemBySlot(EquipmentSlot.HEAD);
-        if (!helmet.is(HAZMAT_MASK)) {
+        if (helmet.isEmpty() || !HAZMAT_MASK_ID.equals(BuiltInRegistries.ITEM.getKey(helmet.getItem()))) {
             return;
         }
 

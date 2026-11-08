@@ -406,6 +406,11 @@ alexscaves_nuclear_convergence:tuff_thorium_ore / alexscaves_nuclear_convergence
 
 ## 更新日志
 
+### v1.4.1
+
+**修复**
+- 修复防化面罩视野遮罩判定错误：戴 AC 防化面罩时不显示遮罩，而头部空槽时反而显示。原因是 `hazmat_mask` 的物品对象在模组构造阶段就被缓存，那时 Alex's Caves 的物品还没进注册表，查询退化成 `minecraft:air`（空头槽也是 AIR）；现在只存注册名，渲染时实时比对并显式排除空槽。
+
 ### v1.4.0
 
 **新增**
