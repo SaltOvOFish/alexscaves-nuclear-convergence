@@ -214,15 +214,21 @@ public class AbandonedReactorFeature extends Feature<AbandonedReactorFeature.Con
         // 外围再铺一圈带坡度的裙边（每向外 1 格、填充起点下降 BASE_SLOPE 格）：
         // 只在有落差处延伸，与地形平滑衔接，整体比 1:1 更窄。填充辐射岩并随机夹带辐射铀矿石，
         // 坡面加小幅抖动使边缘不那么规整。
-        Block baseBlock = BuiltInRegistries.BLOCK.get(
-                ResourceLocation.fromNamespaceAndPath("alexscaves", "radrock"));
-        if (baseBlock == null) {
+        // BuiltInRegistries.BLOCK 是 DefaultedRegistry：缺失时返回 minecraft:air 而非 null，
+        // 原实现直接判空是死代码，AC 缺失时基座会整段填空气。这里按注册名回查，
+        // 缺失时才真正回退到石头。
+        ResourceLocation baseId = ResourceLocation.fromNamespaceAndPath("alexscaves", "radrock");
+        Block baseBlock = BuiltInRegistries.BLOCK.get(baseId);
+        if (!baseId.equals(BuiltInRegistries.BLOCK.getKey(baseBlock))) {
             baseBlock = Blocks.STONE;
         }
         BlockState baseState = baseBlock.defaultBlockState();
-        Block oreBlock = BuiltInRegistries.BLOCK.get(
-                ResourceLocation.fromNamespaceAndPath("alexscaves", "radrock_uranium_ore"));
-        BlockState oreState = oreBlock != null ? oreBlock.defaultBlockState() : baseState;
+
+        ResourceLocation oreId = ResourceLocation.fromNamespaceAndPath("alexscaves", "radrock_uranium_ore");
+        Block oreBlock = BuiltInRegistries.BLOCK.get(oreId);
+        BlockState oreState = oreId.equals(BuiltInRegistries.BLOCK.getKey(oreBlock))
+                ? oreBlock.defaultBlockState()
+                : baseState;
         BoundingBox box = template.getBoundingBox(settings, placePos);
 
         int coreMinX = box.minX() - BASE_CORE_MARGIN;

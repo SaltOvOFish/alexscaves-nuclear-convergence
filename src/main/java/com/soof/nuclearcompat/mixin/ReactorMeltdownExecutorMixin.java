@@ -36,8 +36,11 @@ public abstract class ReactorMeltdownExecutorMixin {
     }
 
     private static void hatchNearby(Level level, BlockPos center) {
+        // BuiltInRegistries.BLOCK 是 DefaultedRegistry：缺失时返回 minecraft:air 而非 null，
+        // 不查注册名的话，AC 缺失时下面的 state.is(egg) 会匹配每一个空气方块，
+        // 造成 73³ 次无意义的反射调用。
         Block egg = BuiltInRegistries.BLOCK.get(TREMORZILLA_EGG_ID);
-        if (egg == null) {
+        if (!TREMORZILLA_EGG_ID.equals(BuiltInRegistries.BLOCK.getKey(egg))) {
             return;
         }
         BlockPos.MutableBlockPos mpos = new BlockPos.MutableBlockPos();
@@ -58,11 +61,16 @@ public abstract class ReactorMeltdownExecutorMixin {
         }
     }
 
+    /** 蛋方块的 {@code spawnDinosaurs} 方法缓存，避免每枚蛋都做一次 {@code getMethod}。 */
+    private static Method acnc$spawnDinosaurs;
+
     private static void hatchEgg(Level level, BlockPos pos, BlockState state) {
         try {
-            Method method = state.getBlock().getClass()
-                    .getMethod("spawnDinosaurs", Level.class, BlockPos.class, BlockState.class);
-            method.invoke(state.getBlock(), level, pos, state);
+            if (acnc$spawnDinosaurs == null) {
+                acnc$spawnDinosaurs = state.getBlock().getClass()
+                        .getMethod("spawnDinosaurs", Level.class, BlockPos.class, BlockState.class);
+            }
+            acnc$spawnDinosaurs.invoke(state.getBlock(), level, pos, state);
         } catch (Exception ignored) {
             // 反射失败时静默忽略。
         }

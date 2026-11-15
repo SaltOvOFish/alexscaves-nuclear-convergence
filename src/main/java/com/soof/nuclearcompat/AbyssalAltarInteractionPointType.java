@@ -12,7 +12,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -30,12 +29,35 @@ import net.minecraft.world.level.block.state.BlockState;
  */
 public final class AbyssalAltarInteractionPointType extends ArmInteractionPointType {
 
-    private static final Block ABYSSAL_ALTAR = BuiltInRegistries.BLOCK.get(
-            ResourceLocation.fromNamespaceAndPath("alexscaves", "abyssal_altar"));
+    private static final ResourceLocation ABYSSAL_ALTAR_ID =
+            ResourceLocation.fromNamespaceAndPath("alexscaves", "abyssal_altar");
+    private static final ResourceLocation PEARL_ID =
+            ResourceLocation.fromNamespaceAndPath("alexscaves", "pearl");
 
-    /** 祭坛的「献祭」物品。 */
-    private static final Item PEARL = BuiltInRegistries.ITEM.get(
-            ResourceLocation.fromNamespaceAndPath("alexscaves", "pearl"));
+    /**
+     * 解析结果缓存（可为 null 表示 Alex's Caves 缺失）。
+     *
+     * <p><b>不能在静态初始化时解析</b>：本类在 {@code RegisterEvent} 里被实例化，那时方块注册表
+     * 可能还没填充完毕，{@code BuiltInRegistries.BLOCK.get(...)} 会返回 {@code minecraft:air}
+     * 并被永久缓存下来，导致机械臂永远认不出祭坛、珍珠进度永不触发。
+     * 因此推迟到首次实际使用时（一定是注册表冻结后的游戏运行期）再解析。</p>
+     */
+    private static Block abyssalAltar;
+    private static Item pearl;
+    private static boolean resolved = false;
+
+    private static void resolve() {
+        if (resolved) {
+            return;
+        }
+        resolved = true;
+        Block block = BuiltInRegistries.BLOCK.get(ABYSSAL_ALTAR_ID);
+        // BuiltInRegistries.BLOCK 是 DefaultedRegistry：缺失时返回 minecraft:air 而非 null。
+        abyssalAltar = ABYSSAL_ALTAR_ID.equals(BuiltInRegistries.BLOCK.getKey(block)) ? block : null;
+        // BuiltInRegistries.ITEM 同理，缺失时返回 minecraft:air。
+        Item item = BuiltInRegistries.ITEM.get(PEARL_ID);
+        pearl = PEARL_ID.equals(BuiltInRegistries.ITEM.getKey(item)) ? item : null;
+    }
 
     private static final ResourceLocation LOVE_DEEP_AND_ROBOTS =
             ResourceLocation.fromNamespaceAndPath(NuclearCompat.MODID, "love_deep_and_robots");
@@ -48,7 +70,8 @@ public final class AbyssalAltarInteractionPointType extends ArmInteractionPointT
 
     @Override
     public boolean canCreatePoint(Level level, BlockPos pos, BlockState state) {
-        return state.getBlock() == ABYSSAL_ALTAR;
+        resolve();
+        return abyssalAltar != null && state.getBlock() == abyssalAltar;
     }
 
     @Override
@@ -78,7 +101,8 @@ public final class AbyssalAltarInteractionPointType extends ArmInteractionPointT
     }
 
     private static boolean isOfferingPearl(ItemStack stack) {
-        return PEARL != Items.AIR && stack.is(PEARL);
+        resolve();
+        return pearl != null && stack.is(pearl);
     }
 
     /**

@@ -44,6 +44,10 @@ public abstract class NuclearExplosionEntityMixin {
     @Unique
     private static EntityType<?> acnc$TREMORZILLA = null;
 
+    /** 是否已完成解析（结果可能是 null，所以不能只靠 acnc$TREMORZILLA 判断）。 */
+    @Unique
+    private static boolean acnc$TREMORZILLA_RESOLVED = false;
+
     @Redirect(
             method = "tick",
             at = @At(
@@ -63,8 +67,12 @@ public abstract class NuclearExplosionEntityMixin {
     }
 
     private static EntityType<?> acnc$tremorzillaType() {
-        if (acnc$TREMORZILLA == null) {
-            acnc$TREMORZILLA = BuiltInRegistries.ENTITY_TYPE.get(TREMORZILLA_ID);
+        if (!acnc$TREMORZILLA_RESOLVED) {
+            // BuiltInRegistries.ENTITY_TYPE 是 DefaultedRegistry：缺失时返回 minecraft:pig 而不是 null，
+            // 不查注册名的话，AC 缺失时所有猪都会变成“撼地斯拉”被核爆滤除。
+            EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.get(TREMORZILLA_ID);
+            acnc$TREMORZILLA = TREMORZILLA_ID.equals(BuiltInRegistries.ENTITY_TYPE.getKey(type)) ? type : null;
+            acnc$TREMORZILLA_RESOLVED = true;
         }
         return acnc$TREMORZILLA;
     }

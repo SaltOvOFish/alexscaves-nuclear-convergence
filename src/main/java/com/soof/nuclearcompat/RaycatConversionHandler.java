@@ -99,8 +99,10 @@ public final class RaycatConversionHandler {
         if (!(living instanceof Mob mob)) {
             return;
         }
+        // BuiltInRegistries.ENTITY_TYPE 是 DefaultedRegistry：缺失时返回 minecraft:pig 而不是 null。
+        // 必须回查注册名，否则 Alex's Caves 缺失时猫会被“转化”成猪。
         EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.get(RAYCAT_ID);
-        if (type == null) {
+        if (!RAYCAT_ID.equals(BuiltInRegistries.ENTITY_TYPE.getKey(type))) {
             return;
         }
         @SuppressWarnings("unchecked")
