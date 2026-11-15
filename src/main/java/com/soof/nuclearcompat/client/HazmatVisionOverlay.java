@@ -29,7 +29,7 @@ import com.soof.nuclearcompat.NuclearCompat;
  * 本效果没有配置开关：内置资源包 {@code Nuclear Convergence: Clear Helmet Vision}（默认不启用）
  * 会把这些贴图以及 Create Nuclear 的同名贴图一并替换为透明图，启用它即可关闭两套头盔的遮挡。</p>
  */
-@EventBusSubscriber(modid = NuclearCompat.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = NuclearCompat.MODID, value = Dist.CLIENT)
 public final class HazmatVisionOverlay {
 
     /**

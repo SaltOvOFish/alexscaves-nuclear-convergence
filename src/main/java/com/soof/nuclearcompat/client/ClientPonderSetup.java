@@ -20,7 +20,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
  * <p>必须在 {@code FMLLoadCompleteEvent}（Ponder 的 {@code registerAll}）之前把插件加入，
  * 因此放在 {@code FMLClientSetupEvent} 里。整个类只在客户端加载。</p>
  */
-@EventBusSubscriber(modid = NuclearCompat.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = NuclearCompat.MODID, value = Dist.CLIENT)
 public final class ClientPonderSetup {
 
     private ClientPonderSetup() {

@@ -23,7 +23,7 @@ import net.neoforged.neoforge.event.AddPackFindersEvent;
  * 同样是可翻译组件（{@code {"translate": "..."}}），两者都靠模组的语言文件翻译
  * （{@code assets/alexscaves_nuclear_convergence/lang/*.json}）。</p>
  */
-@EventBusSubscriber(modid = NuclearCompat.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = NuclearCompat.MODID, value = Dist.CLIENT)
 public final class BuiltinPacks {
 
     private static final ResourceLocation OREGANIZED_STYLE =
