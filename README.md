@@ -444,6 +444,42 @@ alexscaves_nuclear_convergence:tuff_thorium_ore / alexscaves_nuclear_convergence
 
 ## 更新日志
 
+### v1.5.1（未发布，审校与优化）
+
+本版本是 v1.5.0 的全项目审校结果：无玩法数值变动、无注册名/配置键变动、无兼容分支删减，
+五个 Alex's Caves 移植版支持保持不变。
+
+**修复**
+- 修复未安装 Alex's Caves 时游戏**无法启动**的问题：长矛物品改为降级注册占位物品
+  （`mods.toml` 里 `alexscaves` 声明为可选，此前却会抛异常中断模组加载），
+  日志会提示 `'autunite_spear' is registered as an inert placeholder item`；
+- 修复未安装 Alex's Caves 时把 `ItemHandler` 能力注册到 `minecraft:air` 上的问题：
+  核能熔炉组件的能力注册改为按注册名回查，避免任何模组查询空气位时抛 `ClassCastException`；
+- 修复 5 处把 `BuiltInRegistries`（`DefaultedRegistry`）当可空用的判断（缺失时返回默认值而非 `null`，
+  原有判空全是死代码）。其中最明显的一处：AC 缺失时受辐照的猫会被「转化」成猪；
+  另外还修正了核爆伤害过滤、熔毁孵蛋扫描、结构基座填充三处的同类问题；
+- 机械臂交互点改为首次实际使用时惰性解析方块与物品，不再在类加载期缓存注册表结果。
+
+**调整**
+- 日志前缀由 `[ACUp Nuclear Compat]` 统一为 `[Nuclear Convergence]`（后者是只支持 AC Up 时代的遗留）；
+- 移除 3 处已弃用的 `@EventBusSubscriber(bus = ...)` 参数，构建警告由 6 条降为 0；
+- 52 个数据包 JSON 移除 UTF-8 BOM（内容零变化，只是避免脚本/第三方解析器误判）；
+- 长矛投掷音效改为延迟求值，保持「先生成投掷物、再取音效」的原有时序。
+
+**内部重构（不影响行为）**
+- 新增 `IrradiatedEffectSupport`：三套辐照混入共用的 Holder 缓存与「整套护甲免疫」判定；
+- 新增 `SirenSupport`：警报器 / 警示灯共用的扫描周期、相位打散与点亮条件；
+- 新增 `AutuniteSpearRenderSupport`：两套长矛渲染共用的变换矩阵与反射缓存；
+- 长矛投掷流程收敛到 `SpearCompat.throwSpear`；熔炉速度系数收敛到 `NuclearCompatUtil.boostedSpeedReduction`；
+  散落的魔法数字收敛为具名常量。
+  （混入类本身未合并：`@Mixin` 目标无法参数化，各移植版仍各留一份薄桩，`required: false` 不变。）
+
+**性能**
+- 防化面罩的每帧判定由「注册表反向查表」改为「惰性缓存的引用比较」（每帧一次 volatile 读）。
+
+> 说明：交接文档曾建议缓存配置读取，经核实 `ModConfigSpec.ConfigValue#get()` 本身已带缓存
+> 并在重载时自动失效，该项无需处理。
+
 ### v1.5.0
 
 **新增**
