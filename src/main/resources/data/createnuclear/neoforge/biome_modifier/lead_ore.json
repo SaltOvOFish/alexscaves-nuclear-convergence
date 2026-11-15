@@ -1,4 +1,4 @@
-﻿{
+{
     "type":  "neoforge:remove_features",
     "biomes":  "#minecraft:is_overworld",
     "features":  "createnuclear:lead_ore",
