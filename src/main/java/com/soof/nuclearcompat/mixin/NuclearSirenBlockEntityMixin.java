@@ -1,7 +1,7 @@
 package com.soof.nuclearcompat.mixin;
 
 import com.alexscaves.server.block.blockentity.NuclearSirenBlockEntity;
-import com.soof.nuclearcompat.NuclearCompatUtil;
+import com.soof.nuclearcompat.SirenSupport;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -40,20 +40,12 @@ public abstract class NuclearSirenBlockEntityMixin {
     @Inject(method = "tick", at = @At("TAIL"))
     private static void acnc$detectCriticalReactor(
             Level level, BlockPos pos, BlockState state, NuclearSirenBlockEntity be, CallbackInfo ci) {
-        if (level.isClientSide) {
-            return;
-        }
         NuclearSirenBlockEntityMixin self = (NuclearSirenBlockEntityMixin) (Object) be;
-        // 性能优化：64 格内没有玩家、且当前未在报警时直接跳过扫描；
-        // 同时用坐标打散相位，避免多台警报器在同一 tick 集中扫描。
-        if (!self.acnc$reactorDanger
-                && !level.hasNearbyAlivePlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 64.0D)) {
+        // 扫描条件（无玩家跳过、坐标打散相位）与侦测本体都在 SirenSupport，与 Neo 版共用。
+        if (!SirenSupport.shouldScanForReactor(level, pos, self.acnc$reactorDanger, be.age)) {
             return;
         }
-        if (Math.floorMod(be.age + pos.asLong(), 20L) != 0L) {
-            return;
-        }
-        boolean danger = NuclearCompatUtil.findMeltdownReactor(level, pos) != null;
+        boolean danger = SirenSupport.detectReactorDanger(level, pos);
         if (self.acnc$reactorDanger != danger) {
             self.acnc$reactorDanger = danger;
             level.sendBlockUpdated(pos, state, state, 2);

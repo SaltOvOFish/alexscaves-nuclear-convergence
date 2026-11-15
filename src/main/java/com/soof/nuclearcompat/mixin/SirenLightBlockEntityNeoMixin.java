@@ -3,6 +3,7 @@ package com.soof.nuclearcompat.mixin;
 import com.github.alexmodguy.alexscaves.server.block.SirenLightBlock;
 import com.github.alexmodguy.alexscaves.server.block.blockentity.SirenLightBlockEntity;
 import com.soof.nuclearcompat.NuclearCompatUtil;
+import com.soof.nuclearcompat.SirenSupport;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -34,15 +35,12 @@ public abstract class SirenLightBlockEntityNeoMixin {
             return;
         }
         SirenLightBlockEntityNeoMixin self = (SirenLightBlockEntityNeoMixin) (Object) be;
-        // 性能优化：
-        // 1) 附近 64 格内没有玩家时完全不扫描（警示灯只是视觉/听觉反馈）；
-        // 2) 用坐标打散相位，避免大量警示灯在同一 tick 集中扫描。
-        if (level.hasNearbyAlivePlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 64.0D)
-                && Math.floorMod(level.getGameTime() + pos.asLong(), 40L) == 0L) {
+        // 扫描条件与点亮判定都在 SirenSupport，与 Up 版共用。
+        if (SirenSupport.shouldScanHazard(level, pos)) {
             self.acnc$hazard = NuclearCompatUtil.isNuclearHazardNearby(level, pos);
         }
         // 危险时点亮；无危险时回退为红石输入控制（与警示灯原本的逻辑一致）。
-        boolean want = self.acnc$hazard || level.hasNeighborSignal(pos);
+        boolean want = SirenSupport.wantPowered(self.acnc$hazard, level, pos);
         if (state.getValue(SirenLightBlock.POWERED) != want) {
             level.setBlock(pos, state.setValue(SirenLightBlock.POWERED, want), 3);
         }
