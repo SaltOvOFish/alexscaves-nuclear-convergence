@@ -9,6 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
+import net.nuclearteam.createnuclear.CNAttributes;
 
 /**
  * 重设原子核动防辐射套装的护甲数值。
@@ -27,13 +28,28 @@ public final class AntiRadiationArmorHandler {
     /** 每个部件额外的击退抗性。 */
     private static final double KNOCKBACK_RESISTANCE_PER_PIECE = 0.1D;
 
+    /**
+     * CN 辐射模式下，AC 防化服每个部件提供的辐照抗性。
+     *
+     * <p>AC 自己的辐照机制按 25%/件减伤，换成原子核动的数值体系后，只有
+     * {@code createnuclear:irradiated_resistance} 属性有意义；CN 的防辐射套装原本就是
+     * 0.25/件，这里给防化服补上同样的数值，两套护甲才保持对等。</p>
+     */
+    private static final double RADIATION_RESISTANCE_PER_HAZMAT_PIECE = 0.25D;
+
     private static final String NAMESPACE = "createnuclear";
+    private static final String AC_NAMESPACE = "alexscaves";
 
     private AntiRadiationArmorHandler() {
     }
 
     @SubscribeEvent
     public static void onItemAttributes(ItemAttributeModifierEvent event) {
+        // CN 辐射模式下，AC 防化服也需要提供辐照抗性（不受护甲增强开关影响）。
+        if (NuclearCompatConfig.useCreateNuclearRadiation()) {
+            applyHazmatRadiationResistance(event);
+        }
+
         if (!NuclearCompatConfig.COMMON.enhancedAntiRadiationArmor.get()) {
             return;
         }
@@ -81,6 +97,47 @@ public final class AntiRadiationArmorHandler {
         event.addModifier(
                 Attributes.KNOCKBACK_RESISTANCE,
                 new AttributeModifier(knockbackId, KNOCKBACK_RESISTANCE_PER_PIECE,
+                        AttributeModifier.Operation.ADD_VALUE),
+                group);
+    }
+
+    /** 给 AC 的防化服四个部件补上 0.25 辐照抗性（仅 CN 辐射模式）。 */
+    private static void applyHazmatRadiationResistance(ItemAttributeModifierEvent event) {
+        ItemStack stack = event.getItemStack();
+        ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        if (!AC_NAMESPACE.equals(id.getNamespace())) {
+            return;
+        }
+
+        EquipmentSlotGroup group;
+        String piece;
+        switch (id.getPath()) {
+            case "hazmat_mask" -> {
+                group = EquipmentSlotGroup.HEAD;
+                piece = "helmet";
+            }
+            case "hazmat_chestplate" -> {
+                group = EquipmentSlotGroup.CHEST;
+                piece = "chestplate";
+            }
+            case "hazmat_leggings" -> {
+                group = EquipmentSlotGroup.LEGS;
+                piece = "leggings";
+            }
+            case "hazmat_boots" -> {
+                group = EquipmentSlotGroup.FEET;
+                piece = "boots";
+            }
+            default -> {
+                return;
+            }
+        }
+
+        event.addModifier(
+                CNAttributes.IRRADIATED_RESISTANCE,
+                new AttributeModifier(
+                        ResourceLocation.fromNamespaceAndPath(NuclearCompat.MODID, "hazmat_radiation/" + piece),
+                        RADIATION_RESISTANCE_PER_HAZMAT_PIECE,
                         AttributeModifier.Operation.ADD_VALUE),
                 group);
     }

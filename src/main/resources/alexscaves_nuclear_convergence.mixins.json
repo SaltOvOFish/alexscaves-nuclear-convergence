@@ -10,6 +10,7 @@
     "AbyssalAltarBlockMixin",
     "NuclearFurnaceBlockEntityNeoMixin",
     "IrradiatedEffectNeoMixin",
+    "IrradiatedEffectContinuedMixin",
     "AcidBlockNeoMixin",
     "AbyssalAltarBlockNeoMixin",
     "NuclearSirenBlockEntityMixin",

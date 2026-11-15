@@ -1,8 +1,9 @@
 package com.soof.nuclearcompat;
 
-import com.github.alexmodguy.alexscaves.server.entity.item.LimestoneSpearEntity;
 import com.github.alexmodguy.alexscaves.server.item.SpearItem;
-import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,6 +19,17 @@ import net.minecraft.world.level.Level;
  * <p>与 {@link AutuniteSpearItem} 行为完全一致，仅继承自 Neo 版的 {@code SpearItem}。</p>
  */
 public class AutuniteSpearItemNeo extends SpearItem {
+
+    /**
+     * 投掷音效按注册名解析，不直接引用 {@code ACSoundRegistry}。
+     *
+     * <p>各移植版把这个字段声明成了不同类型（AC Neo / Unofficial Port 是
+     * {@code DeferredHolder}，Continued 是 {@code Supplier}，RENEWED 是自带的
+     * {@code RegistryObject}），直接调 {@code .get()} 会在其中两个版本上抛
+     * {@code NoSuchFieldError}；按注册名查注册表则三种都能用。</p>
+     */
+    private static final ResourceLocation LIMESTONE_SPEAR_THROW_ID =
+            ResourceLocation.fromNamespaceAndPath("alexscaves", "limestone_spear_throw");
 
     public AutuniteSpearItemNeo(Item.Properties properties) {
         super(properties, 3.0);
@@ -48,8 +60,10 @@ public class AutuniteSpearItemNeo extends SpearItem {
         }
 
         level.addFreshEntity(spear);
-        level.playSound(null, spear, ACSoundRegistry.LIMESTONE_SPEAR_THROW.get(),
-                SoundSource.PLAYERS, 1.0F, 1.0F);
+        SoundEvent throwSound = BuiltInRegistries.SOUND_EVENT.get(LIMESTONE_SPEAR_THROW_ID);
+        if (throwSound != null) {
+            level.playSound(null, spear, throwSound, SoundSource.PLAYERS, 1.0F, 1.0F);
+        }
 
         if (!player.getAbilities().instabuild) {
             stack.shrink(1);

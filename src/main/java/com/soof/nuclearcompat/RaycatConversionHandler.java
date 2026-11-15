@@ -58,12 +58,24 @@ public final class RaycatConversionHandler {
         }
         LivingEntity living = (LivingEntity) entity;
 
-        if (NuclearCompat.AC_IRRADIATED == null) {
-            return;
+        // 两种辐射体系都要能触发转化：AC 模式下看 alexscaves:irradiated，
+        // CN 模式下看 createnuclear:radiation（此时 AC 辐照已被折算成 CN 剂量）。
+        // 同时取两者中等级较高的一边，避免模式切换时误判。
+        int amplifier = -1;
+        if (NuclearCompat.AC_IRRADIATED != null) {
+            MobEffectInstance acEffect = living.getEffect(NuclearCompat.AC_IRRADIATED);
+            if (acEffect != null) {
+                amplifier = Math.max(amplifier, acEffect.getAmplifier());
+            }
+        }
+        if (NuclearCompat.CN_RADIATION != null) {
+            MobEffectInstance cnEffect = living.getEffect(NuclearCompat.CN_RADIATION);
+            if (cnEffect != null) {
+                amplifier = Math.max(amplifier, cnEffect.getAmplifier());
+            }
         }
 
-        MobEffectInstance effect = living.getEffect(NuclearCompat.AC_IRRADIATED);
-        if (effect == null || effect.getAmplifier() < REQUIRED_AMPLIFIER) {
+        if (amplifier < REQUIRED_AMPLIFIER) {
             // 已经是 0 就不必每 tick 重复写入附件数据。
             if (living.getData(IRRADIATION_TIME) != 0) {
                 living.setData(IRRADIATION_TIME, 0);

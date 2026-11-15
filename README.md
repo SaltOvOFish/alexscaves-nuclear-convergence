@@ -6,9 +6,21 @@
 ## 功能
 
 ### 1. 辐射效果统一
+两种辐射体系二选一，由配置项 `general.radiation_system` 决定（默认 `AC`）：
+
+**`AC`（默认）—— 统一为 Alex's Caves 的辐照**
 - 拦截 `createnuclear:radiation`（Create Nuclear 的辐射效果），改为施加 `alexscaves:irradiated`
   （Alex's Caves 的辐照效果），等级 / 时长 / 氛围 / 可见性保持一致；
 - 当 Create Nuclear 移除辐射效果时，同步移除辐照效果。
+
+**`CN` —— 统一为原子核动的辐射**
+- 原子核动的辐射原样生效（HUD 显示辐射条/心跳遮罩）；
+- 所有 `alexscaves:irradiated` 的施加（长矛、核子可乐，以及 AC 自己的放射性物品、未精炼废料方块、
+  伽马蟑螂、核爆）都会被拦下，按等级折算成辐射剂量：辐照 I / II / III → 剂量 10 / 25 / 50，
+  残留时间 = 原效果剩余时长；
+- AC 防化服四个部件各 +0.25 `createnuclear:irradiated_resistance`（与原子核动防辐射套装对等）。
+
+两种模式下，「穿齐整套防化服 / 防辐射套装免疫辐射」都生效。切换需要重启游戏或重进世界。
 
 ### 2. 铀物品映射（配方 + 掉落）
 | Alex's Caves | Create Nuclear |
@@ -90,7 +102,10 @@
 ### 11. 反应堆熔毁与警报器 / 撼地斯拉孵化联动
 - 当原子核动的反应堆热量达到 DANGER（进入失控爆炸倒计时）时，附近的 Alex's Caves 核能警报器提前响起；
 - 反应堆失控爆炸时，会孵化爆炸范围内（36 格）的 `alexscaves:tremorzilla_egg`（撼地斯拉蛋），
-  且孵出的撼地斯拉对本次核爆免疫（不会被秒杀或击飞），复刻 Alex's Caves 核弹孵化 Boss 的行为。
+  且孵出的撼地斯拉对本次核爆免疫（不会被秒杀或击飞），复刻 Alex's Caves 核弹孵化 Boss 的行为；
+- 撼地斯拉对原子核动的辐射效果（`createnuclear:radiation`）**整体免疫**：站在辐照之地、被反应堆
+  泄漏波及，或直接用 `/effect` 施加都不会生效（AC 本身已对辐照免疫，这里把 CN 的效果一并挡住，
+  两种辐射体系下行为一致）。
 
 ### 12. 辐射生物转化
 - 原版的猫（Cat）与豹猫（Ocelot）在持续受到辐照 III 及以上效果 45 秒后，转化为
@@ -293,9 +308,26 @@ alexscaves_nuclear_convergence:tuff_thorium_ore / alexscaves_nuclear_convergence
 - Minecraft 1.21.1 + NeoForge 21.1.x
 - Create（机械动力，`create`）—— **硬依赖**（Create Nuclear 的父模组）
 - Create Nuclear（原子核动，`createnuclear`）—— **硬依赖**（直接调用其 `BiomeIrradiationService`）
-- Alex's Caves（`alexscaves`）—— **可选依赖**（缺失时 mixin 自动停用）。兼容两个 1.21.1 移植版：
-  - Alex's Caves Up（PixellCubed）
-  - Alex's Caves Neo（TysonTheEmber）
+- Alex's Caves（`alexscaves`）—— **可选依赖**（缺失时 mixin 自动停用）。兼容以下 1.21.1 移植版：
+  - Alex's Caves Up（PixellCubed）—— 包名 `com.alexscaves`
+  - Alex's Caves Neo（TysonTheEmber）—— 包名 `com.github.alexmodguy.alexscaves`
+  - Alex's Caves Continued（Codx-org）—— 同包名，但辐照效果走自建 `ACMobEffect#tick`（需要前置 `codxlib`）
+  - Alex's Caves (Unofficial Port)（Raguto）—— 同包名（需要前置 `citadel`）
+  - Alex's Caves RENEWED（fmpapierz）—— 同包名
+
+  这些移植版共用 `alexscaves` 这个 mod id，数据包无法区分，所以兼容处理全部在代码层：
+  启动时日志会打印 `Alex's Caves flavour: ...`，反馈问题时可以直接附上。
+
+  | 移植版 | 包名 | 辐照效果注入点 | 长矛音效字段 |
+  |---|---|---|---|
+  | AC Up | `com.alexscaves` | `applyEffectTick` | `DeferredHolder` |
+  | AC Neo | `com.github.alexmodguy.alexscaves` | `applyEffectTick` | `DeferredHolder` |
+  | Continued | 同上 | **`tick`**（ACMobEffect） | `Supplier` |
+  | Unofficial Port | 同上 | `applyEffectTick` | `DeferredHolder` |
+  | RENEWED | 同上 | `applyEffectTick` | 自带 `RegistryObject` |
+
+  长矛投掷音效已改为按注册名查询（`alexscaves:limestone_spear_throw`），不再依赖各版本类型不一的
+  `ACSoundRegistry` 字段。
 
 ### 依赖下载（构建前自备，不随仓库提交）
 
@@ -383,9 +415,12 @@ alexscaves_nuclear_convergence:tuff_thorium_ore / alexscaves_nuclear_convergence
 | `reactor_chance` | 1.0 | 废弃反应堆生成概率：**0 = 不生成**，1 = 正常；0~1 之间按概率跳过候选区块 |
 | `[worldgen.ores]` 下的 12 项 | 全部 1.0 | 每种矿石的密度倍率：**0 = 不生成**，1 = 原本密度，可填小数（0.5 = 一半） |
 
-矿石项：`radrock_iron_ore`、`radrock_coal_ore`、`radrock_lead_ore`、`radrock_nitrate_ore`、
-`abyssmarine_thorium_ore`、`tuff_thorium_ore`、`tuff_copper_ore`、`coprolith_lead_ore`、
-`guanostone_nitrate_ore`、`coprolith_silver_ore`、`guanostone_silver_ore`、`autunite_striated_toxic_caves`（钙铀云母矿）。
+矿石项按群系分组排列（与配置文件里的顺序一致）：
+
+- 毒化洞穴：`autunite_striated_toxic_caves`（钙铀云母）、`radrock_iron_ore`、`radrock_coal_ore`、
+  `radrock_lead_ore`、`radrock_nitrate_ore`；
+- 渊海陷窟：`abyssmarine_thorium_ore`、`tuff_thorium_ore`、`tuff_copper_ore`；
+- 异寂空谷：`coprolith_lead_ore`、`guanostone_nitrate_ore`、`coprolith_silver_ore`、`guanostone_silver_ore`。
 
 ### 二、井然有矿 `[oreganized]`
 
@@ -399,12 +434,30 @@ alexscaves_nuclear_convergence:tuff_thorium_ore / alexscaves_nuclear_convergence
 | 项 | 默认 | 说明 |
 |---|---|---|
 | `enhanced_anti_radiation_armor` | true | 增强防辐射套装：头盔 2 / 胸甲 6 / 护腿 5 / 靴子 2，每件 +0.1 击退抗性 |
+| `radiation_system` | `AC` | 辐射体系：`AC` = 统一为 Alex's Caves 的辐照；`CN` = 统一为原子核动的辐射（带 HUD 辐射条，AC 辐照来源折算成辐射剂量） |
 
-> 世界生成与数据包条件在**数据包加载时**求值：改完配置后 `/reload` 即可让矿石 / 反应堆 / 铅整合开关生效（已生成的区块不受影响）；护甲增强在退出重进世界（或重启）后完全生效。
+> 世界生成与数据包条件在**数据包加载时**求值：改完配置后 `/reload` 即可让矿石 / 反应堆 / 铅整合开关生效（已生成的区块不受影响）；护甲增强、辐射体系切换需要在退出重进世界（或重启）后完全生效。
 >
 > 头盔视野遮罩不占用配置项，统一由内置资源包 `Nuclear Convergence: Clear Helmet Vision` 控制：勾选 = 不遮挡，取消勾选 = 遮挡（默认）。
+>
+> 配置文件里的每条注释都是**中英双语**（中文在上、英文在下），英文环境也能直接阅读。
 
 ## 更新日志
+
+### v1.5.0
+
+**新增**
+- 撼地斯拉（`alexscaves:tremorzilla`）现在免疫原子核动的辐射效果，与它对核爆/辐照的免疫保持一致；
+- 新增配置项 `general.radiation_system`（`AC` / `CN`，默认 `AC`），可选择把辐射统一为 Alex's Caves 的辐照，还是原子核动的辐射；
+- `CN` 模式下，AC 的辐照来源（长矛、核子可乐、AC 放射性物品、未精炼废料方块、伽马蟑螂、核爆）
+  会按等级折算为原子核动的辐射剂量（辐照 I / II / III → 10 / 25 / 50，时长按原效果剩余时间）；
+- `CN` 模式下 AC 防化服每个部件额外提供 +0.25 `createnuclear:irradiated_resistance`，与防辐射套装对等。
+
+**调整**
+- 射线猫转化同时识别两种辐射效果（`alexscaves:irradiated` 与 `createnuclear:radiation`），切换体系后仍然有效；
+- 兼容更多 Alex's Caves 1.21.1 移植版：新增 `IrradiatedEffectContinuedMixin`（适配 Continued 的
+  `ACMobEffect#tick`），长矛投掷音效改为按注册名查询（兼容 Continued 的 `Supplier` 与 RENEWED 的
+  `RegistryObject` 字段类型）；启动日志新增移植版检测行。
 
 ### v1.4.1
 

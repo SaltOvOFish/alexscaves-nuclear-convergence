@@ -9,6 +9,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -97,7 +98,57 @@ public class NuclearCompat {
             LOGGER.info("[ACUp Nuclear Compat] Radiation unified: {} -> {}", CN_RADIATION_ID, AC_IRRADIATED_ID);
         }
 
+        logAcFlavour();
         registerAcRadiationSources();
+    }
+
+    /**
+     * 输出检测到的 Alex's Caves 移植版信息，方便用户反馈兼容性问题时定位。
+     *
+     * <p>目前已知的 1.21.1 移植版都共用 {@code alexscaves} 这个 mod id，仅靠依赖声明区分不出版本；
+     * 包名与关键方法才是真正的差异点：</p>
+     * <ul>
+     *     <li>{@code com.alexscaves} → Alex's Caves Up；</li>
+     *     <li>{@code com.github.alexmodguy.alexscaves} → AC Neo / Unofficial Port / RENEWED；</li>
+     *     <li>同一包名但辐照效果覆写 {@code tick(LivingEntity, int)} 的 → Alex's Caves Continued，
+     *         走 {@code IrradiatedEffectContinuedMixin}。</li>
+     * </ul>
+     */
+    private static void logAcFlavour() {
+        boolean up = hasClass("com.alexscaves.server.potion.IrradiatedEffect");
+        boolean neo = hasClass("com.github.alexmodguy.alexscaves.server.potion.IrradiatedEffect");
+
+        String flavour;
+        if (up) {
+            flavour = "Alex's Caves Up (com.alexscaves)";
+        } else if (neo) {
+            flavour = hasClassMethod("com.github.alexmodguy.alexscaves.server.potion.IrradiatedEffect",
+                    "tick", LivingEntity.class, int.class)
+                    ? "Alex's Caves Continued (com.github.alexmodguy.alexscaves, ACMobEffect)"
+                    : "Alex's Caves Neo / Unofficial Port / RENEWED (com.github.alexmodguy.alexscaves)";
+        } else {
+            flavour = "not detected";
+        }
+        LOGGER.info("[ACUp Nuclear Compat] Alex's Caves flavour: {}", flavour);
+    }
+
+    private static boolean hasClass(String name) {
+        try {
+            Class.forName(name, false, NuclearCompat.class.getClassLoader());
+            return true;
+        } catch (ClassNotFoundException | LinkageError e) {
+            return false;
+        }
+    }
+
+    private static boolean hasClassMethod(String className, String method, Class<?>... params) {
+        try {
+            Class<?> type = Class.forName(className, false, NuclearCompat.class.getClassLoader());
+            type.getMethod(method, params);
+            return true;
+        } catch (ClassNotFoundException | NoSuchMethodException | LinkageError e) {
+            return false;
+        }
     }
 
     /**
