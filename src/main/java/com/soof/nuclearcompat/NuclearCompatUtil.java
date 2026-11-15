@@ -43,6 +43,16 @@ public final class NuclearCompatUtil {
     /** 钍棒裂变时间系数，约 64 个物品。 */
     private static final float THORIUM_FISSION_FACTOR = 12800.0f;
 
+    /** 核能熔炉烧炼速度倍率：{@code getSpeedReduction()} 返回值乘 0.5，即烧炼速度翻倍。 */
+    private static final double COOKING_SPEED_FACTOR = 0.5D;
+    /** 速度系数下限，避免被其它模组/配置压到 0 导致瞬间烧炼。 */
+    private static final double MIN_SPEED_REDUCTION = 0.02D;
+
+    /** 反应堆失控侦测的默认半径（格）。 */
+    private static final int DEFAULT_MELTDOWN_SCAN_RADIUS = 32;
+    /** AC 核熔炉的临界阈值：{@code getCriticality() >= 2} 视为已临界。 */
+    private static final int FURNACE_CRITICAL_LEVEL = 2;
+
     private NuclearCompatUtil() {
     }
 
@@ -56,7 +66,7 @@ public final class NuclearCompatUtil {
      * 避免对 CN 反应堆控制器具体类的编译期依赖。</p>
      */
     public static BlockPos findMeltdownReactor(Level level, BlockPos center) {
-        return findMeltdownReactor(level, center, 32);
+        return findMeltdownReactor(level, center, DEFAULT_MELTDOWN_SCAN_RADIUS);
     }
 
     public static BlockPos findMeltdownReactor(Level level, BlockPos center, int radius) {
@@ -116,6 +126,17 @@ public final class NuclearCompatUtil {
                 ? THORIUM_FISSION_FACTOR
                 : URANIUM_FISSION_FACTOR;
         return (int) Math.ceil(factor * speedReduction);
+    }
+
+    /**
+     * 核能熔炉的加速后速度系数（Up / Neo 两套混入共用）。
+     *
+     * <p>该值同时用于 {@code maxCookTime}（烧炼时长）和 {@code getMaxFissionTime()}（燃料棒时长），
+     * 但燃料棒时长已被 {@link #fissionTimeForRod} 直接覆盖，所以这里只影响烧炼速度。</p>
+     */
+    public static float boostedSpeedReduction(float original) {
+        double boosted = original * COOKING_SPEED_FACTOR;
+        return (float) Math.max(MIN_SPEED_REDUCTION, boosted);
     }
 
     // ==================== 核危险环境侦测（供核能警报器 / 核能警示灯等使用）====================
@@ -287,7 +308,7 @@ public final class NuclearCompatUtil {
         }
         try {
             Object r = be.getClass().getMethod("getCriticality").invoke(be);
-            return r instanceof Integer i && i >= 2;
+            return r instanceof Integer i && i >= FURNACE_CRITICAL_LEVEL;
         } catch (Exception ignored) {
             return false;
         }

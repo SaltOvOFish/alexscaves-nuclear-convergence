@@ -28,6 +28,12 @@ public final class AntiRadiationArmorHandler {
     /** 每个部件额外的击退抗性。 */
     private static final double KNOCKBACK_RESISTANCE_PER_PIECE = 0.1D;
 
+    /** 增强后的护甲值（按部件），与 README「头盔 2 / 胸甲 6 / 护腿 5 / 靴子 2」一致。 */
+    private static final double ENHANCED_HELMET_ARMOR = 2.0D;
+    private static final double ENHANCED_CHESTPLATE_ARMOR = 6.0D;
+    private static final double ENHANCED_LEGGINGS_ARMOR = 5.0D;
+    private static final double ENHANCED_BOOTS_ARMOR = 2.0D;
+
     /**
      * CN 辐射模式下，AC 防化服每个部件提供的辐照抗性。
      *
@@ -64,19 +70,19 @@ public final class AntiRadiationArmorHandler {
         EquipmentSlotGroup group;
         String piece;
         if (path.endsWith("anti_radiation_helmet")) {
-            armor = 2.0D;
+            armor = ENHANCED_HELMET_ARMOR;
             group = EquipmentSlotGroup.HEAD;
             piece = "helmet";
         } else if (path.endsWith("anti_radiation_chestplate")) {
-            armor = 6.0D;
+            armor = ENHANCED_CHESTPLATE_ARMOR;
             group = EquipmentSlotGroup.CHEST;
             piece = "chestplate";
         } else if (path.endsWith("anti_radiation_leggings")) {
-            armor = 5.0D;
+            armor = ENHANCED_LEGGINGS_ARMOR;
             group = EquipmentSlotGroup.LEGS;
             piece = "leggings";
         } else if (path.endsWith("anti_radiation_boots")) {
-            armor = 2.0D;
+            armor = ENHANCED_BOOTS_ARMOR;
             group = EquipmentSlotGroup.FEET;
             piece = "boots";
         } else {

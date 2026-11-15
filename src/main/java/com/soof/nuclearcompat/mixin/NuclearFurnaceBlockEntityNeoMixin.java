@@ -41,7 +41,6 @@ public abstract class NuclearFurnaceBlockEntityNeoMixin {
     /** 烧炼速度翻倍（返回值 × 0.5）。 */
     @Inject(method = "getSpeedReduction", at = @At("RETURN"), cancellable = true)
     private static void acnc$speedUpCooking(CallbackInfoReturnable<Float> cir) {
-        double boosted = cir.getReturnValue() * 0.5;
-        cir.setReturnValue((float) Math.max(0.02, boosted));
+        cir.setReturnValue(NuclearCompatUtil.boostedSpeedReduction(cir.getReturnValue()));
     }
 }

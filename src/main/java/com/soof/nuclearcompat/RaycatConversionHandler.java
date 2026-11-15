@@ -30,7 +30,7 @@ public final class RaycatConversionHandler {
     public static final AttachmentType<Integer> IRRADIATION_TIME =
             AttachmentType.builder(() -> 0).build();
 
-    /** 需要持续 45 秒（900 tick）。 */
+    /** 需要持续 45 秒（{@value #CONVERSION_TICKS} tick）。 */
     private static final int CONVERSION_TICKS = 45 * 20;
     /** 辐照 III 对应 amplifier = 2。 */
     private static final int REQUIRED_AMPLIFIER = 2;

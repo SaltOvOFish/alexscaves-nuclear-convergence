@@ -151,6 +151,13 @@ public class NuclearCompat {
         }
     }
 
+    /** 辐射铀矿石在 CN 物品栏辐射体系里的剂量（与黄饼同级）。 */
+    private static final String RADROCK_URANIUM_ORE = "radrock_uranium_ore";
+    private static final double RADROCK_URANIUM_ORE_RADIATION = 4.0D;
+    /** 未精炼废料的剂量（单个即「辐照 III」）。 */
+    private static final String UNREFINED_WASTE = "unrefined_waste";
+    private static final double UNREFINED_WASTE_RADIATION = 50.0D;
+
     /**
      * 把 AC 的两个放射性物品接入原子核动的「物品栏辐射」体系。
      *
@@ -170,8 +177,8 @@ public class NuclearCompat {
      * <p>注意：堆叠会按数量累加，一叠 16 个辐射铀矿石相当于 64。</p>
      */
     private static void registerAcRadiationSources() {
-        registerAcRadiationSource("radrock_uranium_ore", 4.0D);
-        registerAcRadiationSource("unrefined_waste", 50.0D);
+        registerAcRadiationSource(RADROCK_URANIUM_ORE, RADROCK_URANIUM_ORE_RADIATION);
+        registerAcRadiationSource(UNREFINED_WASTE, UNREFINED_WASTE_RADIATION);
     }
 
     /** 按注册名取 AC 物品，存在则登记辐射值；AC 未安装时静默跳过。 */

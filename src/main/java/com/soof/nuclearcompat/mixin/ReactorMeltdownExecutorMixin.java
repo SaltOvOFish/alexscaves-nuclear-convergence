@@ -28,6 +28,11 @@ public abstract class ReactorMeltdownExecutorMixin {
     private static final ResourceLocation TREMORZILLA_EGG_ID =
             ResourceLocation.fromNamespaceAndPath("alexscaves", "tremorzilla_egg");
 
+    /** 孵蛋半径（格），与 README「爆炸范围内（36 格）」一致。 */
+    private static final int HATCH_RADIUS = 36;
+    /** 半径的平方，用于球形范围判定（36² = 1296）。 */
+    private static final double HATCH_RADIUS_SQR = (double) HATCH_RADIUS * HATCH_RADIUS;
+
     @Inject(method = "triggerExplosion", at = @At("HEAD"))
     private void acnc$hatchNearbyTremorzillaEggs(
             ServerLevel level, BlockPos pos, BoundingBox box,
@@ -44,11 +49,11 @@ public abstract class ReactorMeltdownExecutorMixin {
             return;
         }
         BlockPos.MutableBlockPos mpos = new BlockPos.MutableBlockPos();
-        for (int x = -36; x <= 36; x++) {
-            for (int y = -36; y <= 36; y++) {
-                for (int z = -36; z <= 36; z++) {
+        for (int x = -HATCH_RADIUS; x <= HATCH_RADIUS; x++) {
+            for (int y = -HATCH_RADIUS; y <= HATCH_RADIUS; y++) {
+                for (int z = -HATCH_RADIUS; z <= HATCH_RADIUS; z++) {
                     mpos.set(center.getX() + x, center.getY() + y, center.getZ() + z);
-                    if (mpos.distSqr(center) > 1296.0d) {
+                    if (mpos.distSqr(center) > HATCH_RADIUS_SQR) {
                         continue;
                     }
                     BlockState state = level.getBlockState(mpos);

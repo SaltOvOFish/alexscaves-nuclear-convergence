@@ -24,8 +24,10 @@ public final class SpearCompat {
     private static final ResourceLocation IRRADIATED_ID =
             ResourceLocation.fromNamespaceAndPath("alexscaves", "irradiated");
 
-    /** 20 秒 = 400 tick，等级 I（amplifier 0）。 */
+    /** 长矛命中施加的辐照时长：20 秒 = 400 tick。 */
     private static final int IRRADIATED_DURATION = 400;
+    /** 甜蜜冲刺时长：与紫色苏打水一致，10 秒 = 200 tick。 */
+    private static final int SUGAR_RUSH_DURATION = 200;
 
     private SpearCompat() {
     }
@@ -39,10 +41,10 @@ public final class SpearCompat {
                 target.addEffect(new MobEffectInstance(effect, duration, 0)));
     }
 
-    /** 甜蜜冲刺，时长与等级与紫色苏打水一致（200 tick，amplifier 0）。 */
+    /** 甜蜜冲刺，时长与等级与紫色苏打水一致（{@value #SUGAR_RUSH_DURATION} tick，amplifier 0）。 */
     public static void applySugarRush(LivingEntity target) {
         BuiltInRegistries.MOB_EFFECT.getHolder(SUGAR_RUSH_ID).ifPresent(effect ->
-                target.addEffect(new MobEffectInstance(effect, 200, 0)));
+                target.addEffect(new MobEffectInstance(effect, SUGAR_RUSH_DURATION, 0)));
     }
 
     /**
