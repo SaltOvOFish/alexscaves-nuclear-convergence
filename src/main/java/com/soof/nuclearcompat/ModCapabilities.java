@@ -107,7 +107,10 @@ public final class ModCapabilities {
 
     /** 核能熔炉组件方块：无 BlockEntity，通过 WorldlyContainerHolder 转发到主体。 */
     private static void registerNuclearFurnaceComponent(RegisterCapabilitiesEvent event) {
-        Block component = BuiltInRegistries.BLOCK.get(
+        // BuiltInRegistries.BLOCK 是 DefaultedRegistry：缺失时返回 minecraft:air 而不是 null，
+        // 所以必须回查注册名确认。否则 Alex's Caves 缺失时会把这个能力注册到空气上，
+        // provider 里的 (WorldlyContainerHolder) 强转会在任何模组查询空气位时抛 ClassCastException。
+        Block component = blockOrNull(
                 ResourceLocation.fromNamespaceAndPath("alexscaves", "nuclear_furnace_component"));
         if (component == null) {
             return;
@@ -126,5 +129,16 @@ public final class ModCapabilities {
     private static BlockEntityType<?> blockEntityType(String path) {
         return BuiltInRegistries.BLOCK_ENTITY_TYPE.get(
                 ResourceLocation.fromNamespaceAndPath("alexscaves", path));
+    }
+
+    /**
+     * 按注册名取方块，缺失时返回 null。
+     *
+     * <p>{@link BuiltInRegistries#BLOCK} 是 {@code DefaultedRegistry}，{@code get} 对不存在的
+     * 注册名返回 {@code minecraft:air} 而非 null，直接判空会失效（会把能力注册到空气上）。</p>
+     */
+    private static Block blockOrNull(ResourceLocation id) {
+        Block block = BuiltInRegistries.BLOCK.get(id);
+        return id.equals(BuiltInRegistries.BLOCK.getKey(block)) ? block : null;
     }
 }

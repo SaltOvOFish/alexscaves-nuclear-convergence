@@ -94,7 +94,16 @@ public final class ModBlocks {
                         .newInstance(properties);
             } catch (Throwable neoUnavailable) {
                 upUnavailable.addSuppressed(neoUnavailable);
-                throw new IllegalStateException("Neither Alex's Caves Up nor Neo is installed", upUnavailable);
+                // Alex's Caves 是可选依赖：两版都不可用时不能抛异常。
+                // 这个 supplier 在 RegisterEvent 分发物品注册时执行，抛异常会直接让模组加载失败、
+                // 游戏起不来——那与 mods.toml 里 alexscaves=optional 的声明矛盾。
+                // 因此降级注册为普通物品占位：注册名保持不变，数据包引用不会失效，
+                // 只是失去投掷/命中施毒等长矛行为。
+                NuclearCompat.LOGGER.warn(
+                        "[Nuclear Convergence] Neither Alex's Caves Up nor Neo is available; "
+                                + "'{}' is registered as an inert placeholder item.",
+                        "autunite_spear");
+                return new Item(properties);
             }
         }
     }
