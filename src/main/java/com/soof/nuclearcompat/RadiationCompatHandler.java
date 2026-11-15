@@ -177,7 +177,7 @@ public final class RadiationCompatHandler {
 
     /**
      * 同步清除（仅 AC 模式）：当原子核动试图移除自己的辐射效果（辐射源消失或等级变化）时，
-     * 一并移除 Alex's Caves Up 的辐照效果，保持与原版「离开辐射区立即解除」一致。
+     * 一并移除 Alex's Caves 的辐照效果，保持与原版「离开辐射区立即解除」一致。
      */
     @SubscribeEvent
     public static void onEffectRemoved(MobEffectEvent.Remove event) {

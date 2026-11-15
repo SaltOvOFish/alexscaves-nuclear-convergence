@@ -27,9 +27,9 @@ import org.slf4j.Logger;
 /**
  * Alex's Caves: Nuclear Convergence
  *
- * 一个轻量级桥接模组：把「原子核动（Create Nuclear）」的辐射状态效果
- * （createnuclear:radiation）替换为「Alex's Caves Up」的辐照效果
- * （alexscaves:irradiated），让两个模组共用同一套辐射机制。
+ * 一个轻量级桥接模组：把「原子核动（Create Nuclear）」与「Alex's Caves」
+ * 两套辐射机制（createnuclear:radiation / alexscaves:irradiated）按配置统一成其中一套，
+ * 让两个模组共用同一个辐射体系。
  *
  * 实现方式：运行时通过注册表动态解析两个效果（效果缺失时对应桥接自动停用），
  * 在 NeoForge 的 {@code MobEffectEvent.Applicable} 事件里拦截
@@ -46,7 +46,7 @@ public class NuclearCompat {
     /** 原子核动（Create Nuclear）的辐射效果注册名。 */
     public static final ResourceLocation CN_RADIATION_ID = ResourceLocation.fromNamespaceAndPath("createnuclear", "radiation");
 
-    /** Alex's Caves Up 的辐照效果注册名。 */
+    /** Alex's Caves 的辐照效果注册名（五个移植版通用）。 */
     public static final ResourceLocation AC_IRRADIATED_ID = ResourceLocation.fromNamespaceAndPath("alexscaves", "irradiated");
 
     /** 在 commonSetup 阶段解析得到的两个效果 Holder（未找到时为 null，桥接自动停用）。 */
@@ -89,13 +89,13 @@ public class NuclearCompat {
         AC_IRRADIATED = BuiltInRegistries.MOB_EFFECT.getHolder(AC_IRRADIATED_ID).orElse(null);
 
         if (CN_RADIATION == null) {
-            LOGGER.warn("[ACUp Nuclear Compat] Effect '{}' not found. Create Nuclear missing? Radiation replacement disabled.", CN_RADIATION_ID);
+            LOGGER.warn("[Nuclear Convergence] Effect '{}' not found. Create Nuclear missing? Radiation replacement disabled.", CN_RADIATION_ID);
         }
         if (AC_IRRADIATED == null) {
-            LOGGER.warn("[ACUp Nuclear Compat] Effect '{}' not found. Alex's Caves Up missing? Radiation replacement disabled.", AC_IRRADIATED_ID);
+            LOGGER.warn("[Nuclear Convergence] Effect '{}' not found. Alex's Caves missing? Radiation replacement disabled.", AC_IRRADIATED_ID);
         }
         if (CN_RADIATION != null && AC_IRRADIATED != null) {
-            LOGGER.info("[ACUp Nuclear Compat] Radiation unified: {} -> {}", CN_RADIATION_ID, AC_IRRADIATED_ID);
+            LOGGER.info("[Nuclear Convergence] Radiation unified: {} -> {}", CN_RADIATION_ID, AC_IRRADIATED_ID);
         }
 
         logAcFlavour();
@@ -129,7 +129,7 @@ public class NuclearCompat {
         } else {
             flavour = "not detected";
         }
-        LOGGER.info("[ACUp Nuclear Compat] Alex's Caves flavour: {}", flavour);
+        LOGGER.info("[Nuclear Convergence] Alex's Caves flavour: {}", flavour);
     }
 
     private static boolean hasClass(String name) {
@@ -181,11 +181,11 @@ public class NuclearCompat {
         // BuiltInRegistries.ITEM 是 DefaultedRegistry：缺失时会返回 AIR 而不是 null，
         // 所以必须再比对一次注册名，避免把 minecraft:air 当成辐射源。
         if (item == Items.AIR || !id.equals(BuiltInRegistries.ITEM.getKey(item))) {
-            LOGGER.warn("[ACUp Nuclear Compat] Item '{}' not found, skipped as radiation source.", id);
+            LOGGER.warn("[Nuclear Convergence] Item '{}' not found, skipped as radiation source.", id);
             return;
         }
         RadiationRegistry.register().item(item).value(value).build();
-        LOGGER.info("[ACUp Nuclear Compat] Registered radiation source: {} = {}", id, value);
+        LOGGER.info("[Nuclear Convergence] Registered radiation source: {} = {}", id, value);
     }
 
     /** 注册渊海祭坛为机械臂交互点，让机械臂能像置物台一样拿取/放置其中的物品。 */
@@ -199,6 +199,6 @@ public class NuclearCompat {
                 new AbyssalAltarInteractionPointType()
         );
         ArmInteractionPointType.init();
-        LOGGER.info("[ACUp Nuclear Compat] Registered abyssal altar as a mechanical arm interaction point.");
+        LOGGER.info("[Nuclear Convergence] Registered abyssal altar as a mechanical arm interaction point.");
     }
 }
