@@ -3,10 +3,7 @@ package com.soof.nuclearcompat.mixin;
 import com.alexscaves.server.item.HazmatArmorItem;
 import com.alexscaves.server.potion.IrradiatedEffect;
 import com.soof.nuclearcompat.ArmorCompat;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.effect.MobEffect;
+import com.soof.nuclearcompat.IrradiatedEffectSupport;
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,23 +17,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * 1. 部分穿戴（1~3 件）：把防辐射护甲计入防化服数量，获得每件 -25% 的辐照伤害减免。
  * 2. 穿戴整套（4 件防辐射套装 或 4 件防化套装）：免疫辐照效果——在结算前直接移除
  *    Irradiated 效果并跳过本次伤害（不受伤、不饥饿、效果被清除）。
+ *
+ * <p>判断逻辑在 {@link IrradiatedEffectSupport}（三个移植版共用），本类只保留注入框架。</p>
  */
 @Mixin(IrradiatedEffect.class)
 public abstract class IrradiatedEffectMixin {
-
-    private static final ResourceLocation AC_IRRADIATED = ResourceLocation.fromNamespaceAndPath("alexscaves", "irradiated");
-
-    /** 辐照效果的 Holder 缓存：避免每次结算都做一次注册表查询 + Optional 分配。 */
-    private static Holder<MobEffect> acIrradiated;
-
-    private static Holder<MobEffect> acIrradiated() {
-        Holder<MobEffect> holder = acIrradiated;
-        if (holder == null) {
-            holder = BuiltInRegistries.MOB_EFFECT.getHolder(AC_IRRADIATED).orElse(null);
-            acIrradiated = holder;
-        }
-        return holder;
-    }
 
     @Inject(
             method = "applyEffectTick",
@@ -44,11 +29,7 @@ public abstract class IrradiatedEffectMixin {
             cancellable = true
     )
     private void acnc$immuneWhenFullArmor(LivingEntity entity, int amplifier, CallbackInfoReturnable<Boolean> cir) {
-        if (ArmorCompat.hasFullAntiRadiationArmor(entity) || ArmorCompat.hasFullHazmatArmor(entity)) {
-            Holder<MobEffect> irradiated = acIrradiated();
-            if (irradiated != null) {
-                entity.removeEffect(irradiated);
-            }
+        if (IrradiatedEffectSupport.clearWhenFullyArmored(entity)) {
             cir.setReturnValue(false);
         }
     }
