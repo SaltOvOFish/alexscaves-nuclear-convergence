@@ -9,7 +9,9 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -33,15 +35,41 @@ import com.soof.nuclearcompat.NuclearCompat;
 public final class HazmatVisionOverlay {
 
     /**
-     * 只存 ID、不缓存 {@code Item}。
+     * 只存 ID，并在首次渲染时惰性解析为 {@code Item}（见 {@link #hazmatMask()}）。
      *
-     * <p>{@code @EventBusSubscriber} 的类会在模组构造阶段就被加载，那时 Alex's Caves 的物品
-     * 还没进入注册表，{@code BuiltInRegistries.ITEM.get(...)} 会返回 {@code minecraft:air}；
-     * 而空头槽的 {@link ItemStack#getItem()} 恰好也是 AIR，结果就是「不戴头盔时显示遮罩、
-     * 戴防化面罩时反而不显示」。所以这里每次都按注册名实时比对。</p>
+     * <p>不能直接缓存 {@code Item} 常量：{@code @EventBusSubscriber} 的类会在模组构造阶段
+     * 就被加载，那时 Alex's Caves 的物品还没进入注册表，
+     * {@code BuiltInRegistries.ITEM.get(...)} 会返回 {@code minecraft:air}；
+     * 而空头槽的 {@link ItemStack#getItem()} 恰好也是 AIR，结果就是
+     * 「不戴头盔时显示遮罩、戴防化面罩时反而不显示」的旧 bug。</p>
      */
     private static final ResourceLocation HAZMAT_MASK_ID =
             ResourceLocation.fromNamespaceAndPath("alexscaves", "hazmat_mask");
+
+    /**
+     * 防化面罩物品的解析缓存（首次渲染时惰性解析，那时注册表已冻结）。
+     *
+     * <p>性能：本值每个渲染帧都要用，{@code BuiltInRegistries.ITEM.getKey} 是反向查找；
+     * 缓存命中后每帧只剩一次易失读 + 引用比较。</p>
+     *
+     * <p>只缓存命中结果：解析不到（该环境没有防化面罩）时返回 {@link Items#AIR} 但不写入缓存，
+     * 避免把「尚未加载」永久固化成「永远没有」。</p>
+     */
+    private static volatile Item hazmatMask;
+
+    private static Item hazmatMask() {
+        Item cached = hazmatMask;
+        if (cached != null) {
+            return cached;
+        }
+        Item resolved = BuiltInRegistries.ITEM.get(HAZMAT_MASK_ID);
+        // DefaultedRegistry：缺失时返回 minecraft:air 而非 null，必须回查注册名。
+        if (!HAZMAT_MASK_ID.equals(BuiltInRegistries.ITEM.getKey(resolved))) {
+            return Items.AIR;
+        }
+        hazmatMask = resolved;
+        return resolved;
+    }
 
     private static final String TEXTURE_ROOT = "textures/misc/helmet_vision/";
 
@@ -85,7 +113,8 @@ public final class HazmatVisionOverlay {
         }
 
         ItemStack helmet = player.getItemBySlot(EquipmentSlot.HEAD);
-        if (helmet.isEmpty() || !HAZMAT_MASK_ID.equals(BuiltInRegistries.ITEM.getKey(helmet.getItem()))) {
+        // 空槽时 getItem() 也是 AIR，所以先判空再比引用（引用比较比反向查表快）。
+        if (helmet.isEmpty() || helmet.getItem() != hazmatMask()) {
             return;
         }
 
