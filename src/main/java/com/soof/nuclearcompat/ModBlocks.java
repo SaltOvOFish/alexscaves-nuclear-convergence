@@ -110,6 +110,16 @@ public final class ModBlocks {
     /** 隐藏的图标物品：供 AutuniteSpearRender 在 GUI / 地面等场景渲染 16×16 图标（不进创造栏）。 */
     public static final DeferredItem<Item> AUTUNITE_SPEAR_SPRITE = ITEMS.register("autunite_spear_sprite", () -> new Item(new Item.Properties()));
 
+    /**
+     * 隐藏的进度图标物品：直接使用 Alex's Caves 的「甜蜜冲刺」效果贴图。
+     *
+     * <p>各 AC 移植版显示效果图标的方式不同（Up/Neo/Unofficial 用 {@code citadel:effect_item}，
+     * Continued/RENEWED 用 {@code alexscaves:effect_item} 且组件键还不一样），无法用同一个物品 id
+     * 覆盖五种版本；这里自带一个只改了贴图的物品，所有版本都能渲染成同一张效果图标。</p>
+     */
+    public static final DeferredItem<Item> EFFECT_ICON_SUGAR_RUSH =
+            ITEMS.register("effect_icon_sugar_rush", () -> new Item(new Item.Properties()));
+
     public static final DeferredItem<BlockItem> ABYSSMARINE_THORIUM_ORE_ITEM = ITEMS.registerSimpleBlockItem(ABYSSMARINE_THORIUM_ORE);
     public static final DeferredItem<BlockItem> TUFF_THORIUM_ORE_ITEM = ITEMS.registerSimpleBlockItem(TUFF_THORIUM_ORE);
     public static final DeferredItem<BlockItem> TUFF_COPPER_ORE_ITEM = ITEMS.registerSimpleBlockItem(TUFF_COPPER_ORE);

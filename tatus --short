@@ -1,0 +1,158 @@
+warning: in the working copy of 'src/main/java/com/soof/nuclearcompat/ModBlocks.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/java/com/soof/nuclearcompat/NukaColaItem.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/java/com/soof/nuclearcompat/SpearCompat.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/assets/alexscaves_nuclear_convergence/lang/en_us.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/assets/alexscaves_nuclear_convergence/lang/zh_cn.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves/advancement/alexscaves/uranium.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves/advancement/alexscaves/uranium_rod.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves/loot_table/blocks/radrock_uranium_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves/loot_table/chests/toxic_ruins.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves/loot_table/entities/tremorzilla.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves/recipe/block_of_uranium.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves/recipe/furnace/uranium_from_radrock_ore_blasting.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves/recipe/furnace/uranium_from_radrock_ore_smelting.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves/recipe/furnace/uranium_shard_blasting.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves/recipe/furnace/uranium_shard_smelting.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves/recipe/muck_to_sea_glass_shards.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves/recipe/muck_to_sea_glass_shards_blasting.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves/recipe/nuclear_bomb.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves/recipe/nuclear_furnace_component.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves/recipe/nuclear_siren.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves/recipe/raygun.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves/recipe/uranium_from_block.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves/recipe/uranium_from_shard.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves/recipe/uranium_rod.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves/recipe/uranium_shard_from_uranium.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/advancement/chernobyl.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/advancement/love_deep_and_robots.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/advancement/nuka_cola_glow.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/advancement/primitive_nuke.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/loot_table/chests/abandoned_reactor.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/neoforge/biome_modifier/abyssmarine_thorium_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/neoforge/biome_modifier/autunite_striated_toxic_caves.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/neoforge/biome_modifier/coprolith_lead_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/neoforge/biome_modifier/coprolith_silver_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/neoforge/biome_modifier/guanostone_nitrate_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/neoforge/biome_modifier/guanostone_silver_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/neoforge/biome_modifier/radrock_coal_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/neoforge/biome_modifier/radrock_iron_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/neoforge/biome_modifier/radrock_lead_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/neoforge/biome_modifier/radrock_nitrate_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/neoforge/biome_modifier/tuff_copper_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/neoforge/biome_modifier/tuff_thorium_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/recipe/autunite_spear.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/recipe/autunite_spear_from_limestone.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/recipe/nuka_cola.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/tags/item/radiation.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/configured_feature/abandoned_reactor.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/configured_feature/abyssmarine_thorium_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/configured_feature/autunite_striated_toxic_caves.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/configured_feature/coprolith_lead_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/configured_feature/coprolith_silver_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/configured_feature/guanostone_nitrate_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/configured_feature/guanostone_silver_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/configured_feature/radrock_coal_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/configured_feature/radrock_iron_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/configured_feature/radrock_lead_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/configured_feature/radrock_nitrate_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/configured_feature/tuff_copper_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/configured_feature/tuff_thorium_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/placed_feature/abandoned_reactor.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/placed_feature/abyssmarine_thorium_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/placed_feature/autunite_striated_toxic_caves.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/placed_feature/coprolith_lead_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/placed_feature/coprolith_silver_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/placed_feature/guanostone_nitrate_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/placed_feature/guanostone_silver_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/placed_feature/radrock_coal_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/placed_feature/radrock_iron_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/placed_feature/radrock_lead_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/placed_feature/radrock_nitrate_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/placed_feature/tuff_copper_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/placed_feature/tuff_thorium_ore.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/structure/abandoned_reactor.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/alexscaves_nuclear_convergence/worldgen/structure_set/abandoned_reactor.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/minecraft/tags/block/needs_diamond_tool.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/minecraft/tags/block/needs_iron_tool.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/resources/data/oreganized/tags/item/lead_protection/armor_set.json', LF will be replaced by CRLF the next time Git touches it
+ README.md                                          | 286 [32m+++++++[m[31m--------------[m
+ docs/HANDOVER.md                                   | 237 [31m-----------------[m
+ docs/ponder-structures.md                          | 157 [31m-----------[m
+ .../java/com/soof/nuclearcompat/ModBlocks.java     |  10 [32m+[m
+ .../java/com/soof/nuclearcompat/NukaColaItem.java  |  12 [32m+[m[31m-[m
+ .../java/com/soof/nuclearcompat/SpearCompat.java   |   9 [32m+[m[31m-[m
+ .../alexscaves_nuclear_convergence/lang/en_us.json |  22 [32m+[m[31m-[m
+ .../alexscaves_nuclear_convergence/lang/zh_cn.json |  22 [32m+[m[31m-[m
+ .../alexscaves/advancement/alexscaves/uranium.json |   6 [32m+[m
+ .../advancement/alexscaves/uranium_rod.json        |   6 [32m+[m
+ .../loot_table/blocks/radrock_uranium_ore.json     |  10 [32m+[m[31m-[m
+ .../alexscaves/loot_table/chests/toxic_ruins.json  |   8 [32m+[m[31m-[m
+ .../loot_table/entities/tremorzilla.json           |   6 [32m+[m
+ .../data/alexscaves/recipe/block_of_uranium.json   |   6 [32m+[m[31m-[m
+ .../furnace/uranium_from_radrock_ore_blasting.json |   6 [32m+[m[31m-[m
+ .../furnace/uranium_from_radrock_ore_smelting.json |   6 [32m+[m[31m-[m
+ .../recipe/furnace/uranium_shard_blasting.json     |   8 [32m+[m[31m-[m
+ .../recipe/furnace/uranium_shard_smelting.json     |   8 [32m+[m[31m-[m
+ .../recipe/muck_to_sea_glass_shards.json           |   6 [32m+[m
+ .../recipe/muck_to_sea_glass_shards_blasting.json  |   6 [32m+[m
+ .../data/alexscaves/recipe/nuclear_bomb.json       |   6 [32m+[m
+ .../recipe/nuclear_furnace_component.json          |   6 [32m+[m
+ .../data/alexscaves/recipe/nuclear_siren.json      |   6 [32m+[m
+ .../resources/data/alexscaves/recipe/raygun.json   |   6 [32m+[m
+ .../data/alexscaves/recipe/uranium_from_block.json |   6 [32m+[m[31m-[m
+ .../data/alexscaves/recipe/uranium_from_shard.json |   6 [32m+[m[31m-[m
+ .../data/alexscaves/recipe/uranium_rod.json        |   6 [32m+[m
+ .../recipe/uranium_shard_from_uranium.json         |   6 [32m+[m[31m-[m
+ .../advancement/chernobyl.json                     |   6 [32m+[m
+ .../advancement/love_deep_and_robots.json          |   6 [32m+[m
+ .../advancement/nuka_cola_glow.json                |   6 [32m+[m
+ .../advancement/primitive_nuke.json                |   6 [32m+[m
+ .../loot_table/chests/abandoned_reactor.json       |   6 [32m+[m
+ .../biome_modifier/abyssmarine_thorium_ore.json    |  24 [32m+[m[31m-[m
+ .../autunite_striated_toxic_caves.json             |  24 [32m+[m[31m-[m
+ .../biome_modifier/coprolith_lead_ore.json         |  24 [32m+[m[31m-[m
+ .../biome_modifier/coprolith_silver_ore.json       |  32 [32m++[m[31m-[m
+ .../biome_modifier/guanostone_nitrate_ore.json     |  24 [32m+[m[31m-[m
+ .../biome_modifier/guanostone_silver_ore.json      |  32 [32m++[m[31m-[m
+ .../neoforge/biome_modifier/radrock_coal_ore.json  |  24 [32m+[m[31m-[m
+ .../neoforge/biome_modifier/radrock_iron_ore.json  |  24 [32m+[m[31m-[m
+ .../neoforge/biome_modifier/radrock_lead_ore.json  |  24 [32m+[m[31m-[m
+ .../biome_modifier/radrock_nitrate_ore.json        |  24 [32m+[m[31m-[m
+ .../neoforge/biome_modifier/tuff_copper_ore.json   |  24 [32m+[m[31m-[m
+ .../neoforge/biome_modifier/tuff_thorium_ore.json  |  24 [32m+[m[31m-[m
+ .../recipe/autunite_spear.json                     |   6 [32m+[m
+ .../recipe/autunite_spear_from_limestone.json      |   6 [32m+[m
+ .../recipe/nuka_cola.json                          |   6 [32m+[m
+ .../tags/item/radiation.json                       |  10 [32m+[m[31m-[m
+ .../configured_feature/abandoned_reactor.json      |   6 [32m+[m
+ .../abyssmarine_thorium_ore.json                   |  17 [32m+[m[31m-[m
+ .../autunite_striated_toxic_caves.json             |  26 [32m+[m[31m-[m
+ .../configured_feature/coprolith_lead_ore.json     |  17 [32m+[m[31m-[m
+ .../configured_feature/coprolith_silver_ore.json   |  17 [32m+[m[31m-[m
+ .../configured_feature/guanostone_nitrate_ore.json |  17 [32m+[m[31m-[m
+ .../configured_feature/guanostone_silver_ore.json  |  17 [32m+[m[31m-[m
+ .../configured_feature/radrock_coal_ore.json       |  25 [32m+[m[31m-[m
+ .../configured_feature/radrock_iron_ore.json       |  25 [32m+[m[31m-[m
+ .../configured_feature/radrock_lead_ore.json       |  17 [32m+[m[31m-[m
+ .../configured_feature/radrock_nitrate_ore.json    |  17 [32m+[m[31m-[m
+ .../configured_feature/tuff_copper_ore.json        |  17 [32m+[m[31m-[m
+ .../configured_feature/tuff_thorium_ore.json       |  17 [32m+[m[31m-[m
+ .../worldgen/placed_feature/abandoned_reactor.json |   6 [32m+[m
+ .../placed_feature/abyssmarine_thorium_ore.json    |  52 [32m++[m[31m--[m
+ .../autunite_striated_toxic_caves.json             |  52 [32m++[m[31m--[m
+ .../placed_feature/coprolith_lead_ore.json         |  52 [32m++[m[31m--[m
+ .../placed_feature/coprolith_silver_ore.json       |  52 [32m++[m[31m--[m
+ .../placed_feature/guanostone_nitrate_ore.json     |  52 [32m++[m[31m--[m
+ .../placed_feature/guanostone_silver_ore.json      |  52 [32m++[m[31m--[m
+ .../worldgen/placed_feature/radrock_coal_ore.json  |  52 [32m++[m[31m--[m
+ .../worldgen/placed_feature/radrock_iron_ore.json  |  52 [32m++[m[31m--[m
+ .../worldgen/placed_feature/radrock_lead_ore.json  |  52 [32m++[m[31m--[m
+ .../placed_feature/radrock_nitrate_ore.json        |  52 [32m++[m[31m--[m
+ .../worldgen/placed_feature/tuff_copper_ore.json   |  52 [32m++[m[31m--[m
+ .../worldgen/placed_feature/tuff_thorium_ore.json  |  52 [32m++[m[31m--[m
+ .../worldgen/structure/abandoned_reactor.json      |   6 [32m+[m
+ .../worldgen/structure_set/abandoned_reactor.json  |  40 [32m+[m[31m--[m
+ .../minecraft/tags/block/needs_diamond_tool.json   |   5 [32m+[m[31m-[m
+ .../data/minecraft/tags/block/needs_iron_tool.json |   2 [31m-[m
+ .../tags/item/lead_protection/armor_set.json       |  20 [32m+[m[31m-[m
+ 80 files changed, 1107 insertions(+), 1078 deletions(-)

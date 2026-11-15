@@ -1,4 +1,10 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "alexscaves"
+    }
+  ],
   "type": "alexscaves_nuclear_convergence:catalyst_shaped",
   "category": "misc",
   "pattern": [

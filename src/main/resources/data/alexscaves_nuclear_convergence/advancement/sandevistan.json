@@ -1,0 +1,32 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "alexscaves"
+    }
+  ],
+  "parent": "alexscaves_nuclear_convergence:nuka_cola_glow",
+  "display": {
+    "icon": {
+      "id": "alexscaves_nuclear_convergence:effect_icon_sugar_rush"
+    },
+    "title": {
+      "translate": "advancements.alexscaves_nuclear_convergence.sandevistan.title"
+    },
+    "description": {
+      "translate": "advancements.alexscaves_nuclear_convergence.sandevistan.desc"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": true
+  },
+  "criteria": {
+    "drink_64_nuka_cola": {
+      "trigger": "alexscaves_nuclear_convergence:drank_nuka_cola",
+      "conditions": {
+        "count": 64
+      }
+    }
+  }
+}

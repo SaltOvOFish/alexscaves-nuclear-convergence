@@ -1,12 +1,23 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "alexscaves"
+    }
+  ],
   "type": "minecraft:ore",
   "config": {
-    "discard_chance_on_air_exposure": 0.0,
+    "discard_chance_on_air_exposure": 0,
     "size": 10,
     "targets": [
       {
-        "state": { "Name": "alexscaves_nuclear_convergence:guanostone_silver_ore" },
-        "target": { "predicate_type": "minecraft:block_match", "block": "alexscaves:guanostone" }
+        "state": {
+          "Name": "alexscaves_nuclear_convergence:guanostone_silver_ore"
+        },
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "alexscaves:guanostone"
+        }
       }
     ]
   }

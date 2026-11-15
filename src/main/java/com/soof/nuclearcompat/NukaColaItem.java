@@ -22,16 +22,16 @@ import net.minecraft.world.level.Level;
  * <p>行为复制自 Alex's Caves 的紫色苏打水瓶（{@code purple_soda_bottle}）：
  * 堆叠 16、营养 2 / 饱和度 0.1、饮用 40 tick、返还玻璃瓶。</p>
  *
- * <p>额外效果：饮用后获得 10 秒甜蜜冲刺（与紫色苏打水同级，amplifier 0）
- * 与 10 秒辐照 I。</p>
+ * <p>额外效果：饮用后获得 20 秒甜蜜冲刺（与紫色苏打水同级，amplifier 0）
+ * 与 20 秒辐照 I。</p>
  */
 public class NukaColaItem extends Item {
 
     /** 与紫色苏打水瓶一致的饮用时长（40 tick）。 */
     private static final int DRINK_DURATION = 40;
 
-    /** 10 秒 = 200 tick。 */
-    private static final int EFFECT_DURATION = 200;
+    /** 20 秒 = 400 tick（甜蜜冲刺与辐照共用）。 */
+    private static final int EFFECT_DURATION = 400;
 
     public NukaColaItem(Item.Properties properties) {
         super(properties);
@@ -68,13 +68,15 @@ public class NukaColaItem extends Item {
         ItemStack result = super.finishUsingItem(stack, level, entity);
 
         if (!level.isClientSide) {
-            SpearCompat.applySugarRush(entity);
+            SpearCompat.applySugarRush(entity, EFFECT_DURATION);
             SpearCompat.applyIrradiated(entity, EFFECT_DURATION);
         }
 
         if (entity instanceof ServerPlayer serverPlayer) {
             CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, stack);
             serverPlayer.awardStat(Stats.ITEM_USED.get(this));
+            // 累计饮用瓶数，供「你太依赖斯安威斯坦了」隐藏挑战进度判定。
+            NukaColaProgressHandler.onDrunk(serverPlayer);
         }
 
         if (stack.isEmpty()) {

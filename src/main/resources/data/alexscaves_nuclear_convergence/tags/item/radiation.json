@@ -15,8 +15,14 @@
     "createnuclear:thorium_rod",
     "createnuclear:thorium_ore",
     "createnuclear:deepslate_thorium_ore",
-    "alexscaves:radrock_uranium_ore",
-    "alexscaves:unrefined_waste",
+    {
+      "id": "alexscaves:radrock_uranium_ore",
+      "required": false
+    },
+    {
+      "id": "alexscaves:unrefined_waste",
+      "required": false
+    },
     "alexscaves_nuclear_convergence:tuff_thorium_ore",
     "alexscaves_nuclear_convergence:abyssmarine_thorium_ore"
   ]

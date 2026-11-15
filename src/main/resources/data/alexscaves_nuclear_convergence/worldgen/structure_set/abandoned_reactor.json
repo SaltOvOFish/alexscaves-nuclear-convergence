@@ -1,20 +1,24 @@
 {
-    "structures":  [
-                       {
-                           "structure":  "alexscaves_nuclear_convergence:abandoned_reactor",
-                           "weight":  1
-                       }
-                   ],
-    "placement":  {
-                      "type":  "minecraft:random_spread",
-                      "salt":  842196731,
-                      "spacing":  6,
-                      "separation":  3
-                  },
-    "neoforge:conditions":  [
-                                {
-                                    "type":  "alexscaves_nuclear_convergence:config",
-                                    "key":  "worldgen.reactor_chance"
-                                }
-                            ]
+  "structures": [
+    {
+      "structure": "alexscaves_nuclear_convergence:abandoned_reactor",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 842196731,
+    "spacing": 6,
+    "separation": 3
+  },
+  "neoforge:conditions": [
+    {
+      "type": "alexscaves_nuclear_convergence:config",
+      "key": "worldgen.reactor_chance"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "alexscaves"
+    }
+  ]
 }

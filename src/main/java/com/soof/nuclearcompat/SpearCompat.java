@@ -41,10 +41,15 @@ public final class SpearCompat {
                 target.addEffect(new MobEffectInstance(effect, duration, 0)));
     }
 
-    /** 甜蜜冲刺，时长与等级与紫色苏打水一致（{@value #SUGAR_RUSH_DURATION} tick，amplifier 0）。 */
+    /** 甜蜜冲刺，默认时长与紫色苏打水一致（{@value #SUGAR_RUSH_DURATION} tick，amplifier 0）。 */
     public static void applySugarRush(LivingEntity target) {
+        applySugarRush(target, SUGAR_RUSH_DURATION);
+    }
+
+    /** 甜蜜冲刺，指定时长（tick），等级与紫色苏打水一致（amplifier 0）。 */
+    public static void applySugarRush(LivingEntity target, int duration) {
         BuiltInRegistries.MOB_EFFECT.getHolder(SUGAR_RUSH_ID).ifPresent(effect ->
-                target.addEffect(new MobEffectInstance(effect, SUGAR_RUSH_DURATION, 0)));
+                target.addEffect(new MobEffectInstance(effect, duration, 0)));
     }
 
     /**
